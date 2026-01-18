@@ -1,0 +1,94 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="KeyBeats E-R Model">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- USER ENTITY -->
+        <mxCell id="user-entity" value="USER" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="100" y="200" width="160" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="user-attrs" value="PK: id (string)&#xa;nickname (string) UNIQUE&#xa;email (string) UNIQUE&#xa;password (string)&#xa;avatar (string)&#xa;level (int)&#xa;completedSongs (int)&#xa;createdAt (datetime)" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="110" y="230" width="140" height="200" as="geometry"/>
+        </mxCell>
+        
+        <!-- SONG ENTITY -->
+        <mxCell id="song-entity" value="SONG" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="500" y="200" width="160" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="song-attrs" value="PK: id (string)&#xa;name (string)&#xa;author (string)&#xa;duration (string)&#xa;maxStars (int)&#xa;coverImage (string)&#xa;audioFile (string)" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="510" y="230" width="140" height="160" as="geometry"/>
+        </mxCell>
+        
+        <!-- SONGPROGRESS ENTITY (RELATION TABLE) -->
+        <mxCell id="progress-entity" value="SONG_PROGRESS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="300" y="200" width="160" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="progress-attrs" value="PK: id (string)&#xa;FK: userId (string)&#xa;FK: songId (string)&#xa;starsEarned (int)&#xa;lastPlayed (datetime)&#xa;attempts (int)" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="310" y="230" width="140" height="140" as="geometry"/>
+        </mxCell>
+        
+        <!-- BEAT ENTITY -->
+        <mxCell id="beat-entity" value="BEAT" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="500" y="480" width="160" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="beat-attrs" value="PK: id (string)&#xa;FK: songId (string)&#xa;timestamp (float)&#xa;keys (string)&#xa;order (int)" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="510" y="510" width="140" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- RELATIONSHIPS -->
+        <!-- User to SongProgress -->
+        <mxCell id="user-progress-rel" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;endFill=0;startArrow=ERone;startFill=0;" edge="1" parent="1" source="user-entity" target="progress-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="user-progress-label" value="has" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="user-progress-rel">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- SongProgress to Song -->
+        <mxCell id="progress-song-rel" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERone;endFill=0;startArrow=ERmany;startFill=0;" edge="1" parent="1" source="progress-entity" target="song-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="progress-song-label" value="for" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="progress-song-rel">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Song to Beat -->
+        <mxCell id="song-beat-rel" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;endFill=0;startArrow=ERone;startFill=0;" edge="1" parent="1" source="song-entity" target="beat-entity">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="song-beat-label" value="contains" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1;" vertex="1" connectable="0" parent="song-beat-rel">
+          <mxGeometry x="-0.1" y="1" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- CARDINALITY LABELS -->
+        <mxCell id="card1" value="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="280" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="card2" value="N" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="280" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="card3" value="N" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="280" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="card4" value="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="280" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="card5" value="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="400" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="card6" value="N" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="460" width="20" height="20" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
