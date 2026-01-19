@@ -3,20 +3,27 @@
    Kawaii/Pastel Theme - Osu Inspired
    =================================== */
 
+
 /* ===================================
    1. ROOT VARIABLES & RESET
    =================================== */
 
 :root {
     /* Pastel Color Palette */
-    --color-primary: #FFB6C1;          /* Light Pink */
-    --color-primary-dark: #FF69B4;     /* Hot Pink */
-    --color-secondary: #E6E6FA;        /* Lavender */
-    --color-accent: #FFD4E5;           /* Pastel Pink */
-    --color-success: #98D8C8;          /* Mint Green */
-    --color-error: #FF6B6B;            /* Coral Red */
-    --color-warning: #FFE66D;          /* Pastel Yellow */
-    
+    --color-primary: #FFB6C1;
+    /* Light Pink */
+    --color-primary-dark: #FF69B4;
+    /* Hot Pink */
+    --color-secondary: #E6E6FA;
+    /* Lavender */
+    --color-accent: #FFD4E5;
+    /* Pastel Pink */
+    --color-success: #98D8C8;
+    /* Mint Green */
+    --color-error: #FF6B6B;
+    /* Coral Red */
+    --color-warning: #FFE66D;
+    /* Pastel Yellow */
     /* Neutral Colors */
     --color-white: #FFFFFF;
     --color-cream: #FFF8F0;
@@ -25,12 +32,11 @@
     --color-dark-gray: #888888;
     --color-text-primary: #4A4A4A;
     --color-text-secondary: #888888;
-    
     /* Background Colors */
-    --bg-solid: #FFF0F5;               /* Lavender Blush */
+    --bg-solid: #FFF0F5;
+    /* Lavender Blush */
     --bg-card: rgba(255, 255, 255, 0.95);
     --bg-overlay: rgba(0, 0, 0, 0.3);
-    
     /* Spacing */
     --spacing-xs: 4px;
     --spacing-sm: 8px;
@@ -38,7 +44,6 @@
     --spacing-lg: 24px;
     --spacing-xl: 32px;
     --spacing-xxl: 48px;
-    
     /* Typography */
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --font-size-xs: 12px;
@@ -47,35 +52,32 @@
     --font-size-lg: 18px;
     --font-size-xl: 24px;
     --font-size-xxl: 32px;
-    
     /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
     --radius-round: 50%;
-    
     /* Shadows */
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
     --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.25);
-    
     /* Card Fixed Dimensions */
     --card-width: 420px;
     --card-height: 580px;
     --card-padding: 32px;
-    
     /* Avatar Sizes */
     --avatar-display-size: 120px;
     --avatar-thumbnail-size: 70px;
-    
     /* Transitions */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
 }
 
+
 /* Reset & Base Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -96,6 +98,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 /* ===================================
    2. BACKGROUND LAYERS
    =================================== */
@@ -113,11 +116,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, 
-        var(--bg-solid) 0%, 
-        #FFE4E1 50%, 
-        #E6E6FA 100%
-    );
+    background: linear-gradient(135deg, var(--bg-solid) 0%, #FFE4E1 50%, #E6E6FA 100%);
 }
 
 .background-animated {
@@ -133,9 +132,14 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 0.4; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.4;
+    }
 }
+
 
 /* ===================================
    3. REGISTRATION CONTAINER
@@ -150,6 +154,7 @@ body {
     padding: var(--spacing-lg);
 }
 
+
 /* ===================================
    4. REGISTRATION CARD (FIXED SIZE)
    =================================== */
@@ -157,21 +162,23 @@ body {
 .registration-card {
     position: relative;
     width: var(--card-width);
-    height: var(--card-height);
+    min-height: var(--card-height);
     background: var(--bg-card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xl);
     padding: var(--card-padding);
-    overflow: hidden;
     backdrop-filter: blur(10px);
     border: 2px solid var(--color-primary);
     transition: transform var(--transition-normal);
+    height: auto;
+    overflow: visible;
 }
 
 .registration-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 16px 32px rgba(255, 182, 193, 0.3);
 }
+
 
 /* ===================================
    5. CARD HEADER
@@ -189,6 +196,7 @@ body {
     text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
     letter-spacing: 1px;
 }
+
 
 /* ===================================
    6. FORM STRUCTURE
@@ -222,6 +230,7 @@ body {
     }
 }
 
+
 /* ===================================
    7. AVATAR SECTION (STEP 1)
    =================================== */
@@ -233,7 +242,9 @@ body {
     margin-bottom: var(--spacing-md);
 }
 
+
 /* Avatar Display Circle */
+
 .avatar-display {
     width: var(--avatar-display-size);
     height: var(--avatar-display-size);
@@ -257,7 +268,9 @@ body {
     object-fit: cover;
 }
 
+
 /* Dropdown Toggle Line with Arrow */
+
 .avatar-dropdown-toggle {
     position: relative;
     width: 100%;
@@ -270,12 +283,7 @@ body {
 .toggle-line {
     flex: 1;
     height: 2px;
-    background: linear-gradient(to right, 
-        transparent 0%, 
-        var(--color-primary) 20%, 
-        var(--color-primary) 80%, 
-        transparent 100%
-    );
+    background: linear-gradient(to right, transparent 0%, var(--color-primary) 20%, var(--color-primary) 80%, transparent 100%);
 }
 
 .toggle-button {
@@ -319,7 +327,9 @@ body {
     transform: rotate(180deg);
 }
 
+
 /* Avatar Grid Container */
+
 .avatar-grid-container {
     width: 100%;
     overflow: hidden;
@@ -333,7 +343,9 @@ body {
     padding: var(--spacing-sm) 0;
 }
 
+
 /* Avatar Option */
+
 .avatar-option {
     position: relative;
 }
@@ -369,7 +381,7 @@ body {
     border-color: var(--color-primary);
 }
 
-.avatar-radio:checked + .avatar-label .avatar-thumbnail {
+.avatar-radio:checked+.avatar-label .avatar-thumbnail {
     border-color: var(--color-primary-dark);
     box-shadow: 0 0 0 3px var(--color-accent);
 }
@@ -391,7 +403,7 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
-.avatar-radio:checked + .avatar-label .avatar-selected-indicator {
+.avatar-radio:checked+.avatar-label .avatar-selected-indicator {
     opacity: 1;
     transform: scale(1);
 }
@@ -400,6 +412,7 @@ body {
     color: var(--color-white);
     font-size: var(--font-size-sm);
 }
+
 
 /* ===================================
    8. INPUT SECTION
@@ -415,7 +428,9 @@ body {
     margin-bottom: var(--spacing-lg);
 }
 
+
 /* Form Label */
+
 .form-label {
     display: flex;
     align-items: center;
@@ -426,7 +441,9 @@ body {
     margin-bottom: var(--spacing-sm);
 }
 
+
 /* Info Tooltip Button */
+
 .info-tooltip {
     background: none;
     border: none;
@@ -457,7 +474,9 @@ body {
     font-size: var(--font-size-sm);
 }
 
+
 /* Tooltip - will be styled via JS */
+
 .tooltip-container {
     position: absolute;
     background: var(--color-text-primary);
@@ -484,7 +503,9 @@ body {
     border-bottom: 6px solid var(--color-text-primary);
 }
 
+
 /* Input Wrapper */
+
 .input-wrapper {
     position: relative;
     display: flex;
@@ -529,7 +550,9 @@ body {
     opacity: 0.7;
 }
 
+
 /* Validation Icon */
+
 .validation-icon {
     position: absolute;
     right: 12px;
@@ -541,11 +564,11 @@ body {
     pointer-events: none;
 }
 
-.form-input.valid ~ .validation-icon {
+.form-input.valid~.validation-icon {
     display: flex;
 }
 
-.form-input.valid ~ .validation-icon::before {
+.form-input.valid~.validation-icon::before {
     content: '\f00c';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
@@ -553,11 +576,11 @@ body {
     font-size: var(--font-size-md);
 }
 
-.form-input.error ~ .validation-icon {
+.form-input.error~.validation-icon {
     display: flex;
 }
 
-.form-input.error ~ .validation-icon::before {
+.form-input.error~.validation-icon::before {
     content: '\f00d';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
@@ -565,7 +588,9 @@ body {
     font-size: var(--font-size-md);
 }
 
+
 /* Toggle Password Button */
+
 .toggle-password {
     position: absolute;
     right: 12px;
@@ -594,7 +619,9 @@ body {
     font-size: var(--font-size-md);
 }
 
+
 /* Input Help Text */
+
 .input-help {
     display: block;
     font-size: var(--font-size-xs);
@@ -602,7 +629,9 @@ body {
     margin-top: var(--spacing-xs);
 }
 
+
 /* Error Message */
+
 .error-message {
     display: block;
     font-size: var(--font-size-sm);
@@ -612,7 +641,9 @@ body {
     font-weight: 500;
 }
 
+
 /* Availability Message */
+
 .availability-message {
     display: block;
     font-size: var(--font-size-sm);
@@ -628,6 +659,7 @@ body {
 .availability-message.unavailable {
     color: var(--color-error);
 }
+
 
 /* ===================================
    9. PASSWORD STRENGTH INDICATOR
@@ -685,40 +717,43 @@ body {
     letter-spacing: 0.5px;
 }
 
-.strength-fill[data-strength="0"] ~ .strength-text {
+.strength-fill[data-strength="0"]~.strength-text {
     color: var(--color-text-secondary);
 }
 
-.strength-fill[data-strength="1"] ~ .strength-text::before {
+.strength-fill[data-strength="1"]~.strength-text::before {
     content: 'Weak';
     color: var(--color-error);
 }
 
-.strength-fill[data-strength="2"] ~ .strength-text::before {
+.strength-fill[data-strength="2"]~.strength-text::before {
     content: 'Fair';
     color: var(--color-warning);
 }
 
-.strength-fill[data-strength="3"] ~ .strength-text::before {
+.strength-fill[data-strength="3"]~.strength-text::before {
     content: 'Good';
     color: var(--color-primary);
 }
 
-.strength-fill[data-strength="4"] ~ .strength-text::before {
+.strength-fill[data-strength="4"]~.strength-text::before {
     content: 'Strong';
     color: var(--color-success);
 }
+
 
 /* ===================================
    10. NAVIGATION BUTTONS
    =================================== */
 
 .form-navigation {
+    position: relative;
     display: flex;
     gap: var(--spacing-md);
     justify-content: center;
-    margin-top: auto;
-    padding-top: var(--spacing-lg);
+    padding-top: calc(var(--spacing-lg) + 4px);
+    padding-bottom: 4px;
+    overflow: visible;
 }
 
 .btn {
@@ -758,7 +793,9 @@ body {
     transform: none;
 }
 
+
 /* Back Button */
+
 .btn-back {
     background: var(--color-light-gray);
     color: var(--color-text-primary);
@@ -768,7 +805,9 @@ body {
     background: var(--color-gray);
 }
 
+
 /* Next Button */
+
 .btn-next {
     background: var(--color-primary);
     color: var(--color-white);
@@ -778,7 +817,9 @@ body {
     background: var(--color-primary-dark);
 }
 
+
 /* Submit Button */
+
 .btn-submit {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: var(--color-white);
@@ -788,6 +829,7 @@ body {
 .btn-submit:hover {
     background: linear-gradient(135deg, var(--color-primary-dark) 0%, #FF1493 100%);
 }
+
 
 /* ===================================
    11. LOADING OVERLAY
@@ -818,7 +860,9 @@ body {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loading-text {
@@ -827,6 +871,7 @@ body {
     font-weight: 600;
     color: var(--color-primary-dark);
 }
+
 
 /* ===================================
    12. FOOTER LINKS
@@ -860,6 +905,7 @@ body {
     border-radius: var(--radius-sm);
 }
 
+
 /* ===================================
    13. ACCESSIBILITY
    =================================== */
@@ -881,92 +927,93 @@ body {
     left: var(--spacing-md);
 }
 
+
 /* Focus visible for keyboard navigation */
+
 *:focus-visible {
     outline: 2px solid var(--color-primary-dark);
     outline-offset: 2px;
 }
 
+
 /* ===================================
    14. RESPONSIVE DESIGN
    =================================== */
 
+
 /* Tablet */
+
 @media (max-width: 768px) {
-    :root {
+     :root {
         --card-width: 360px;
         --card-height: 540px;
         --card-padding: 24px;
         --avatar-display-size: 100px;
         --avatar-thumbnail-size: 60px;
     }
-    
     .registration-container {
         padding: var(--spacing-md);
     }
-    
     .card-title {
         font-size: var(--font-size-xl);
     }
-    
     .avatar-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: var(--spacing-xs);
     }
-    
     .form-navigation {
         flex-direction: column;
     }
-    
     .btn {
         width: 100%;
         justify-content: center;
     }
 }
 
+
 /* Mobile */
+
 @media (max-width: 480px) {
-    :root {
+     :root {
         --card-width: 100%;
         --card-height: auto;
         --card-padding: 20px;
         --avatar-display-size: 90px;
         --avatar-thumbnail-size: 50px;
     }
-    
     .registration-card {
         height: auto;
         min-height: 500px;
         max-height: 90vh;
     }
-    
     .card-title {
         font-size: var(--font-size-lg);
     }
-    
     .avatar-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: 6px;
     }
-    
     .form-input {
         font-size: var(--font-size-sm);
         padding: var(--spacing-sm) var(--spacing-md);
     }
-    
     .btn {
         padding: var(--spacing-sm) var(--spacing-lg);
         font-size: var(--font-size-sm);
     }
 }
 
+
 /* ===================================
    15. ANIMATIONS & EFFECTS
    =================================== */
 
+
 /* Pulse animation for buttons */
+
 @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
         box-shadow: 0 0 0 0 rgba(255, 182, 193, 0.7);
     }
     50% {
@@ -978,16 +1025,33 @@ body {
     animation: pulse 2s infinite;
 }
 
+
 /* Shake animation for errors */
+
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
 }
 
 .form-input.error {
     animation: shake 0.5s ease;
 }
+
 
 /* ===================================
    16. PRINT STYLES
@@ -998,7 +1062,6 @@ body {
     .loading-overlay {
         display: none;
     }
-    
     .registration-card {
         box-shadow: none;
         border: 1px solid var(--color-text-primary);
