@@ -18,7 +18,7 @@ let formData = {
 };
 
 // Base API path
-const API_BASE = 'keybeats/api/';
+const API_BASE = 'api/';
 
 // ===================================
 // 2. DOCUMENT READY

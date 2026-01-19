@@ -1,71 +1,85 @@
 <?php
 // keybeats/api/register-user.php
+// Safe JSON response
 
-header('Content-Type: application/json');
+ob_start();
+ini_set('display_errors', '0');
+error_reporting(0);
 
-// Get data from AJAX request
+header('Content-Type: application/json; charset=utf-8');
+
+// Read POST data
 $nickname = $_POST['nickname'] ?? '';
-$email = $_POST['email'] ?? '';
+$email    = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
-$avatar = $_POST['avatar'] ?? '';
+$avatar   = $_POST['avatar'] ?? '';
 
+// Validate required fields
 if (!$nickname || !$email || !$password || !$avatar) {
+    ob_clean();
     echo json_encode([
         "success" => false,
         "message" => "Missing required fields"
-    ]);
+    ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
+// Load users
 $usersFile = __DIR__ . "/../data/users.json";
-
-// Load existing users or create empty array
+$users = [];
 if (file_exists($usersFile)) {
-    $users = json_decode(file_get_contents($usersFile), true);
-} else {
-    $users = [];
+    $raw = @file_get_contents($usersFile);
+    $users = @json_decode($raw, true) ?: [];
 }
 
-// Check again to avoid duplicates
+// Check duplicates
 foreach ($users as $user) {
     if (strtolower($user['nickname']) === strtolower($nickname)) {
+        ob_clean();
         echo json_encode([
             "success" => false,
-            "message" => "Nickname already exists"
-        ]);
+            "message" => "Nickname already taken"
+        ], JSON_UNESCAPED_UNICODE);
         exit;
     }
-
     if (strtolower($user['email']) === strtolower($email)) {
+        ob_clean();
         echo json_encode([
             "success" => false,
-            "message" => "Email already exists"
-        ]);
+            "message" => "Email already registered"
+        ], JSON_UNESCAPED_UNICODE);
         exit;
     }
 }
 
-// Create new user (simple version)
+// Hash password
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+// Add new user
 $newUser = [
-    "id" => "user_" . time() . "_" . rand(1000, 9999),
     "nickname" => $nickname,
-    "email" => $email,
-    "password" => password_hash($password, PASSWORD_DEFAULT),
-    "avatar" => $avatar,
-    "level" => 0,
-    "completedSongs" => 0,
-    "songProgress" => new stdClass(),
-    "createdAt" => date("c")
+    "email"    => $email,
+    "password" => $hashedPassword,
+    "avatar"   => $avatar,
+    "progress" => []  // optional: store song progress
 ];
 
-// Add to array
 $users[] = $newUser;
 
-// Save back to JSON
-file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT));
+// Save users JSON
+if (@file_put_contents($usersFile, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) === false) {
+    ob_clean();
+    echo json_encode([
+        "success" => false,
+        "message" => "Failed to save user"
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
+// Return success
+ob_clean();
 echo json_encode([
     "success" => true,
-    "message" => "User registered successfully",
-    "userId" => $newUser["id"]
-]);
+    "message" => "User registered successfully"
+], JSON_UNESCAPED_UNICODE);
+exit;
