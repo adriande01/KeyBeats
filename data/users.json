@@ -1,9 +1,7 @@
-[
-    {
-        "nickname": "adrian",
-        "email": "adrian@gmail.com",
-        "password": "$2y$10$7XSEYTC4iF2YghHsqHwlmev6mXh6.Rafe9Nfx8lVkmCzvxWJ1isMa",
-        "avatar": "av7",
-        "progress": []
-    }
-]
+[{
+    "nickname": "adrian",
+    "email": "adrian@gmail.com",
+    "password": "$2y$10$7XSEYTC4iF2YghHsqHwlmev6mXh6.Rafe9Nfx8lVkmCzvxWJ1isMa",
+    "avatar": "av7",
+    "progress": []
+}]

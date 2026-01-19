@@ -1,5 +1,3 @@
-
-
 // ===================================
 // 1. GLOBAL VARIABLES & STATE
 // ===================================
@@ -290,14 +288,14 @@ function validateStep1() {
             if (response.exists) {
                 $errorMsg.text('This nickname is already taken');
                 $availMsg.removeClass('available')
-                         .addClass('unavailable')
-                         .text('Nickname unavailable');
+                    .addClass('unavailable')
+                    .text('Nickname unavailable');
                 $nicknameInput.addClass('error').removeClass('valid');
                 isAvailable = false;
             } else {
                 $availMsg.removeClass('unavailable')
-                         .addClass('available')
-                         .text('Nickname available ✓');
+                    .addClass('available')
+                    .text('Nickname available ✓');
                 formData.nickname = nickname;
                 isAvailable = true;
             }
@@ -332,14 +330,14 @@ function validateStep2() {
             if (response.exists) {
                 $errorMsg.text('This email is already registered');
                 $availMsg.removeClass('available')
-                         .addClass('unavailable')
-                         .text('Email already registered');
+                    .addClass('unavailable')
+                    .text('Email already registered');
                 $emailInput.addClass('error').removeClass('valid');
                 isAvailable = false;
             } else {
                 $availMsg.removeClass('unavailable')
-                         .addClass('available')
-                         .text('Email available ✓');
+                    .addClass('available')
+                    .text('Email available ✓');
                 formData.email = email;
                 isAvailable = true;
             }
@@ -390,12 +388,12 @@ function setupRealtimeValidation() {
             $.post(API_BASE + 'check-nickname.php', { nickname }, function(response) {
                 if (response.exists) {
                     $availMsg.removeClass('available')
-                             .addClass('unavailable')
-                             .text('Nickname unavailable');
+                        .addClass('unavailable')
+                        .text('Nickname unavailable');
                 } else {
                     $availMsg.removeClass('unavailable')
-                             .addClass('available')
-                             .text('Nickname available ✓');
+                        .addClass('available')
+                        .text('Nickname available ✓');
                 }
             });
         } else {
@@ -411,12 +409,12 @@ function setupRealtimeValidation() {
             $.post(API_BASE + 'check-email.php', { email }, function(response) {
                 if (response.exists) {
                     $availMsg.removeClass('available')
-                             .addClass('unavailable')
-                             .text('Email already registered');
+                        .addClass('unavailable')
+                        .text('Email already registered');
                 } else {
                     $availMsg.removeClass('unavailable')
-                             .addClass('available')
-                             .text('Email available ✓');
+                        .addClass('available')
+                        .text('Email available ✓');
                 }
             });
         } else {
@@ -481,13 +479,13 @@ function initializeTooltips() {
     $('.info-tooltip').on('mouseenter focus', function() {
         const tooltipText = $(this).data('tooltip');
         const $tooltip = $('#tooltipContainer');
-        const rect = this.getBoundingClientRect();
+        const offset = $(this).offset();
 
         $tooltip.text(tooltipText);
 
         const tooltipWidth = $tooltip.outerWidth();
-        const leftPos = rect.left + (rect.width / 2) - (tooltipWidth / 2);
-        const topPos = rect.top - 50;
+        const leftPos = offset.left + ($(this).outerWidth() / 2) - (tooltipWidth / 2);
+        const topPos = offset.top - $tooltip.outerHeight() - 12;
 
         $tooltip.css({
             display: 'block',

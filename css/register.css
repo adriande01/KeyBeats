@@ -491,16 +491,16 @@ body {
 }
 
 .tooltip-container::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: -6px;
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
     width: 0;
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-bottom: 6px solid var(--color-text-primary);
+    border-top: 6px solid var(--color-text-primary);
 }
 
 
@@ -658,6 +658,10 @@ body {
 
 .availability-message.unavailable {
     color: var(--color-error);
+}
+
+.fa-question-circle {
+    top: 80px;
 }
 
 
