@@ -214,8 +214,13 @@ function validateStep1() {
         data: { email: email },
         async: false,
         success: function(response) {
-            const result = JSON.parse(response);
-            emailExists = result.exists;
+            /*
+            if (typeof response === 'string') {
+                response = JSON.parse(response);
+            }
+                */
+            emailExists = response.exists;
+            
         },
         error: function() {
             showError('Connection error. Please try again.');
@@ -272,21 +277,28 @@ function setupPasswordToggle() {
 // ===================================
 
 function initializeTooltips() {
-    $('.info-tooltip').on('mouseenter focus', function() {
+     $('.info-tooltip').on('mouseenter focus', function() {
         const tooltipText = $(this).data('tooltip');
         const $tooltip = $('#tooltipContainer');
-        const rect = this.getBoundingClientRect();
-        
+        const offset = $(this).offset();
+
         $tooltip.text(tooltipText);
+
+        const tooltipWidth = $tooltip.outerWidth();
+        const leftPos = offset.left + ($(this).outerWidth() / 2) - (tooltipWidth / 2);
+        const topPos = offset.top - $tooltip.outerHeight() - 12;
+
         $tooltip.css({
             display: 'block',
-            top: (rect.top - 60) + 'px',
-            left: (rect.left + rect.width / 2 - 100) + 'px'
+            top: topPos + 'px',
+            left: leftPos + 'px'
         });
+
+        $tooltip.addClass('show');
     });
-    
+
     $('.info-tooltip').on('mouseleave blur', function() {
-        $('#tooltipContainer').css('display', 'none');
+        $('#tooltipContainer').removeClass('show').hide();
     });
 }
 
@@ -379,11 +391,12 @@ function handleFormSubmit() {
 
 function handleLoginResponse(response) {
     try {
-        const result = JSON.parse(response);
-        
-        if (result.success) {
+        //const result = JSON.parse(response);
+        console.log(response);
+        if (response.success) {
+            
             // Login successful
-            const user = result.user;
+            const user = response.user;
             
             // Create session cookie
             createSession(user);
@@ -406,7 +419,7 @@ function handleLoginResponse(response) {
             const $passwordError = $('#password-error');
             const $passwordInput = $('#password');
             
-            $passwordError.text('Incorrect password');
+            $passwordError.text(response.message || 'Incorrect password');
             $passwordInput.addClass('error').removeClass('valid');
             
             // Clear password field

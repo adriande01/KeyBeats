@@ -12,6 +12,7 @@ header('Content-Type: application/json; charset=utf-8');
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 
+
 // Validate input
 if (empty($email) || empty($password)) {
     ob_clean();
@@ -65,7 +66,7 @@ if ($foundUser === null) {
 }
 
 // Verify password
-if ($foundUser['password'] !== $password) {
+if (!password_verify($password, $foundUser['password'])) {
     ob_clean();
     echo json_encode([
         "success" => false,
