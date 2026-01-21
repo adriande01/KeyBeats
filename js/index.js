@@ -218,6 +218,7 @@ function loadSongs() {
   });
 }
 
+
 // ============================================================================
 // HEADER COMPONENT
 // ============================================================================
@@ -236,35 +237,6 @@ function updateHeader() {
 
   // Update level (total stars)
   $("#levelNumber").text(displayInfo.level);
-}
-
-/**
- * Toggle user dropdown menu (Settings, Logout)
- */
-function toggleUserDropdown() {
-  const dropdownMenu = $("#dropdownMenu");
-  const dropdownToggle = $("#dropdownToggle");
-
-  if (dropdownMenu.is(":visible")) {
-    // Hide dropdown
-    dropdownMenu.slideUp(200);
-    dropdownToggle.attr("aria-expanded", "false");
-  } else {
-    // Show dropdown
-    dropdownMenu.slideDown(200);
-    dropdownToggle.attr("aria-expanded", "true");
-  }
-}
-
-/**
- * Handle logout action
- */
-function handleLogout() {
-  // Delete session cookie
-  deleteCookie("keybeats_session");
-
-  // Redirect to login page
-  window.location.href = "login.html";
 }
 
 // ============================================================================
@@ -289,20 +261,20 @@ function renderSongCards() {
     const cardHtml = `
     <div class="song-card" data-song-id="${song.id}">
         <div class="song-card-inner">
-                    
-                    <!-- Song Info -->
-                    <div class="song-info">
-                        <h3 class="song-name">${cardInfo.name}</h3>
-                        <p class="song-author">${cardInfo.author}</p>
-                    </div>
-                    
-                    <!-- Song Stars (Progress) -->
-                    <div class="song-stars" data-stars-earned="${starsEarned}" data-max-stars="${cardInfo.maxStars}">
-                        ${generateStarsHTML(starDisplay.filledStars, starDisplay.emptyStars)}
-                    </div>
-                </div>
+            <!-- Song Info -->
+            <div class="song-info">
+                <h3 class="song-name">${cardInfo.name}</h3>
+                <p class="song-author">${cardInfo.author}</p>
+                <p class="song-duration">${song.duration}</p>
             </div>
-        `;
+            
+            <!-- Song Stars (Progress) -->
+            <div class="song-stars" data-stars-earned="${starsEarned}" data-max-stars="${cardInfo.maxStars}">
+                ${generateStarsHTML(starDisplay.filledStars, starDisplay.emptyStars)}
+            </div>
+        </div>
+    </div>
+`;
 
     songContainer.append(cardHtml);
   });
@@ -327,7 +299,7 @@ function generateStarsHTML(filled, empty) {
 
   // Add empty stars
   for (let i = 0; i < empty; i++) {
-    html += '<far class="far fa-star star-empty"></i>';
+    html += '<i class="far fa-star star-empty"></i>';
   }
 
   return html;
@@ -390,11 +362,11 @@ function handleSongCardClick(cardElement) {
  */
 function handleSongCardHover(cardElement, isEntering) {
   if (isEntering) {
-    // Add 'hovered' class for CSS animation
     cardElement.addClass("hovered");
+    cardElement.css("z-index", 10); // que sobresalga sobre las demás
   } else {
-    // Remove 'hovered' class
     cardElement.removeClass("hovered");
+    cardElement.css("z-index", ""); // reset
   }
 }
 
@@ -416,30 +388,19 @@ function updateDetailsPanel(songId) {
 
   const detailInfo = song.getDetailInfo();
   const progress = getUserProgressForSong(songId);
-  const starsEarned = progress ? progress.starsEarned : 0;
   const attempts = progress ? progress.attempts : 0;
-  const starDisplay = song.getStarDisplay(starsEarned);
 
   // Hide placeholder, show content
   $("#placeholderMessage").hide();
   $("#songDetailsContent").fadeIn(300);
 
-  // Update detail fields
+  // Update detail fields (ONLY: NAME, DIFFICULTY, ATTEMPTS)
   $("#detailName").text(detailInfo.name);
-  $("#detailAuthor").text(detailInfo.author);
-  $("#detailDuration").text(detailInfo.duration);
   $("#detailAttempts").text(attempts);
 
   // Update difficulty stars (max stars)
   const difficultyHtml = generateStarsHTML(detailInfo.maxStars, 0);
   $("#detailDifficulty").html(difficultyHtml);
-
-  // Update best score stars (stars earned)
-  const bestScoreHtml = generateStarsHTML(
-    starDisplay.filledStars,
-    starDisplay.emptyStars,
-  );
-  $("#detailBestScore").html(bestScoreHtml);
 }
 
 /**
@@ -464,13 +425,6 @@ function handlePlayButtonClick() {
  */
 function handleKeyboardShortcuts() {
   $(document).on("keydown", function (e) {
-    // Escape: Close dropdown if open
-    if (e.key === "Escape") {
-      if ($("#dropdownMenu").is(":visible")) {
-        toggleUserDropdown();
-      }
-    }
-
     // Enter: Play selected song
     if (e.key === "Enter") {
       if (selectedSongId) {
@@ -529,36 +483,11 @@ function initEventListeners() {
 
   // Header: Avatar click (go to profile)
   $("#userInfo").on("click", function (e) {
-    // Only navigate if not clicking the dropdown toggle
-    if (!$(e.target).closest("#dropdownToggle").length) {
-      window.location.href = "profile.html";
-    }
-  });
-
-  // Header: Dropdown toggle
-  $("#dropdownToggle").on("click", function (e) {
-    e.stopPropagation();
-    toggleUserDropdown();
-  });
-
-  // Header: Logout button
-  $("#logoutBtn").on("click", function (e) {
-    e.preventDefault();
-    handleLogout();
+    window.location.href = "profile.html";
   });
 
   // Play button click
   $("#playBtn").on("click", handlePlayButtonClick);
-
-  // Close dropdown when clicking outside
-  $(document).on("click", function (e) {
-    if (!$(e.target).closest("#userInfo").length) {
-      if ($("#dropdownMenu").is(":visible")) {
-        $("#dropdownMenu").slideUp(200);
-        $("#dropdownToggle").attr("aria-expanded", "false");
-      }
-    }
-  });
 
   // Keyboard shortcuts
   handleKeyboardShortcuts();

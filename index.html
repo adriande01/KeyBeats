@@ -78,33 +78,13 @@
             <!-- Right: User Avatar + Level -->
             <div class="header-right">
                 <div class="user-info" id="userInfo">
-                    <!-- Avatar Image -->
+                    <!-- Avatar Image with Level Badge INSIDE -->
                     <div class="avatar-container">
                         <img src="assets/avatars/av0.png" alt="User avatar" class="avatar-image" id="headerAvatar">
-                    </div>
-
-                    <!-- User Level (Total Stars) -->
-                    <div class="level-badge" id="levelBadge">
-                        <i class="fas fa-star level-star"></i>
-                        <span class="level-number" id="levelNumber">0</span>
-                    </div>
-
-                    <!-- Dropdown Menu (Settings) -->
-                    <div class="user-dropdown" id="userDropdown">
-                        <button type="button" class="dropdown-toggle" id="dropdownToggle" aria-label="User menu" aria-expanded="false" aria-controls="dropdownMenu">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-
-                        <!-- Dropdown Menu -->
-                        <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
-                            <a href="profile.html" class="dropdown-item">
-                                <i class="fas fa-user"></i>
-                                Profile
-                            </a>
-                            <a href="#" class="dropdown-item" id="logoutBtn">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Logout
-                            </a>
+                        <!-- User Level (Total Stars) - BELOW avatar -->
+                        <div class="level-badge" id="levelBadge">
+                            <i class="fas fa-star level-star"></i>
+                            <span class="level-number" id="levelNumber">0</span>
                         </div>
                     </div>
                 </div>
@@ -118,27 +98,6 @@
             <div class="song-list-section">
                 <div class="song-container" id="songContainer">
                     <!-- Song cards will be dynamically generated here -->
-                    <!-- Example structure (generated via JS):
-                    
-                    <div class="song-card" data-song-id="song_1">
-                        <div class="song-card-inner">
-                            <div class="song-cover">
-                                <img src="assets/covers/ttfaf.jpg" alt="Song cover">
-                            </div>
-                            <div class="song-info">
-                                <h3 class="song-name">Through the Fire and Flames</h3>
-                                <p class="song-author">DragonForce</p>
-                                <p class="song-duration">07:21</p>
-                            </div>
-                            <div class="song-stars">
-                                <i class="fas fa-star star-filled"></i>
-                                <i class="fas fa-star star-filled"></i>
-                                <i class="far fa-star star-empty"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    -->
                 </div>
             </div>
 
@@ -161,18 +120,6 @@
                             <div class="detail-value" id="detailName">-</div>
                         </div>
 
-                        <!-- Song Author -->
-                        <div class="detail-group">
-                            <label class="detail-label">AUTHOR</label>
-                            <div class="detail-value" id="detailAuthor">-</div>
-                        </div>
-
-                        <!-- Song Duration -->
-                        <div class="detail-group">
-                            <label class="detail-label">DURATION</label>
-                            <div class="detail-value" id="detailDuration">-</div>
-                        </div>
-
                         <!-- Difficulty (Max Stars) -->
                         <div class="detail-group">
                             <label class="detail-label">DIFFICULTY</label>
@@ -185,14 +132,6 @@
                         <div class="detail-group">
                             <label class="detail-label">ATTEMPTS</label>
                             <div class="detail-value" id="detailAttempts">0</div>
-                        </div>
-
-                        <!-- Best Score (Stars Earned) -->
-                        <div class="detail-group">
-                            <label class="detail-label">BEST SCORE</label>
-                            <div class="detail-value best-score-stars" id="detailBestScore">
-                                <!-- Stars will be generated dynamically -->
-                            </div>
                         </div>
 
                         <!-- Play Button -->

@@ -1,34 +1,11 @@
-/* =========================================
-   KEYBEATS - INDEX PAGE (OSU STYLE)
-   ========================================= */
+/* ===================================
+   KEYBEATS INDEX - MAIN PAGE STYLES
+   Song selection with Osu-style circular layout
+   =================================== */
 
-/* ========== ROOT VARIABLES ========== */
-
-:root {
-    --color-bg-main: #0e0e18;
-    --color-bg-card: rgba(255, 255, 255, 0.08);
-    --color-bg-card-hover: rgba(255, 255, 255, 0.14);
-
-    --color-primary: #ff9acb;
-    --color-secondary: #bbaaff;
-    --color-accent: #7df9ff;
-
-    --color-text-main: #ffffff;
-    --color-text-muted: #cfcfe6;
-
-    --star-filled: #ffd86b;
-    --star-empty: rgba(255, 255, 255, 0.25);
-
-    --radius-card: 18px;
-    --radius-disk: 50%;
-
-    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.45);
-
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.35s ease;
-}
-
-/* ========== RESET ========== */
+/* ===================================
+   1. RESET & BASE STYLES
+   =================================== */
 
 * {
     margin: 0;
@@ -36,219 +13,569 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background: var(--color-bg-main);
-    color: var(--color-text-main);
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #FFF8F0;
     overflow-x: hidden;
+    color: #333;
 }
 
-/* =========================================
-   BACKGROUND (FRACTAL / ANIME)
-   ========================================= */
+/* ===================================
+   2. LOADING ANIMATION (GSAP FRACTAL)
+   =================================== */
 
-.index-background {
+.loading-animation {
     position: fixed;
-    inset: 0;
-    z-index: -2;
-    background: url("../assets/backgrounds/fractal-5.png") center / cover no-repeat;
-    opacity: 0.4;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #FFB6C1 0%, #E6E6FA 100%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Overlay to darken background */
-.index-background-overlay {
+.fractal-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#fractalSvg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.loading-text {
+    position: absolute;
+    font-size: 48px;
+    font-weight: 700;
+    color: #FFF;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+}
+
+/* ===================================
+   3. BACKGROUND LAYER
+   =================================== */
+
+.background-layer {
     position: fixed;
-    inset: 0;
-    background: radial-gradient(
-        circle at center,
-        rgba(0, 0, 0, 0.2),
-        rgba(0, 0, 0, 0.75)
-    );
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
 }
 
-/* =========================================
-   MAIN LAYOUT
-   ========================================= */
+.background-solid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFB6C1 50%, #E6E6FA 100%);
+}
 
-.index-container {
-    display: flex;
+.background-animated {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/backgrounds/beats-pulse.gif') center/cover no-repeat;
+    opacity: 0.3;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.5; }
+}
+
+/* ===================================
+   4. MAIN CONTAINER
+   =================================== */
+
+.main-container {
+    width: 100%;
     min-height: 100vh;
-    padding: 40px 30px;
+    padding: 20px;
 }
 
-/* Left column: song list */
-.song-list-container {
-    width: 420px;
-    max-width: 100%;
+/* ===================================
+   5. HEADER COMPONENT
+   =================================== */
+
+.header {
     display: flex;
-    flex-direction: column;
-    gap: 18px;
-    overflow-y: auto;
-    padding-right: 12px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
 }
 
-/* Custom scrollbar */
-.song-list-container::-webkit-scrollbar {
-    width: 6px;
+/* Header Left - Logo */
+.header-left .logo-link {
+    text-decoration: none;
 }
 
-.song-list-container::-webkit-scrollbar-thumb {
-    background: var(--color-primary);
-    border-radius: 4px;
+.logo-text {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #FFB6C1, #E6E6FA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* Right area (details / future panels) */
-.song-detail-container {
-    flex: 1;
-    padding-left: 50px;
+/* Header Center - Page Title */
+.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 2px;
 }
 
-/* =========================================
-   SONG CARD (OSU STYLE)
-   ========================================= */
-
-.song-card {
+/* Header Right - User Info */
+.user-info {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 14px 18px;
-    background: var(--color-bg-card);
-    border-radius: var(--radius-card);
+    gap: 15px;
     cursor: pointer;
-    box-shadow: var(--shadow-soft);
-    transition: transform var(--transition-normal),
-                background var(--transition-normal);
+    position: relative;
 }
 
-.song-card:hover {
-    background: var(--color-bg-card-hover);
-    transform: translateX(6px);
-}
-
-/* =========================================
-   SONG DISK IMAGE
-   ========================================= */
-
-.song-disk {
-    width: 64px;
-    height: 64px;
-    border-radius: var(--radius-disk);
+.avatar-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     overflow: hidden;
-    flex-shrink: 0;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+    border: 3px solid #FFB6C1;
+    transition: transform 0.3s ease;
 }
 
-.song-disk img {
+.user-info:hover .avatar-container {
+    transform: scale(1.1);
+}
+
+.avatar-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* =========================================
-   SONG INFO
-   ========================================= */
+.level-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: linear-gradient(135deg, #FFB6C1, #E6E6FA);
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: #FFF;
+    font-weight: 600;
+}
+
+.level-star {
+    font-size: 16px;
+}
+
+.level-number {
+    font-size: 18px;
+}
+
+/* Dropdown Menu */
+.user-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: transparent;
+    border: none;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #FFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background: #FFB6C1;
+    color: #FFF;
+}
+
+/* ===================================
+   6. CONTENT WRAPPER
+   =================================== */
+
+.content-wrapper {
+    display: flex;
+    gap: 30px;
+    padding: 0 40px;
+}
+
+/* ===================================
+   7. SONG LIST SECTION (LEFT 60%)
+   =================================== */
+
+.song-list-section {
+    flex: 0 0 60%;
+}
+
+.song-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    position: relative; /* importante para que translateX funcione visualmente */
+}
+
+
+
+/* Custom Scrollbar */
+.song-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.song-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.song-container::-webkit-scrollbar-thumb {
+    background: #FFB6C1;
+    border-radius: 10px;
+}
+
+/* Song Card (Osu-style, circular/disc layout) */
+.song-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+    width: 90%;
+    transition: transform 0.3s ease; /* SOLO transform */
+}
+
+.song-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    border-color: #FFB6C1;
+}
+
+.song-card.hovered {
+    transform: scaleX(1.05) translateX(var(--curve-offset, 0px));
+    z-index: 10;
+}
+.song-card.selected {
+    border-color: #E6E6FA;
+    background: rgba(230, 230, 250, 0.3);
+}
+
+.song-card-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
 
 .song-info {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
 }
 
 .song-name {
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    color: #333;
+    margin-bottom: 5px;
 }
 
 .song-author {
-    font-size: 13px;
-    color: var(--color-text-muted);
-    margin-top: 2px;
+    font-size: 16px;
+    color: #666;
+    margin: 0;
 }
-
-/* =========================================
-   STAR DISPLAY
-   ========================================= */
 
 .song-stars {
     display: flex;
-    gap: 4px;
-    margin-left: auto;
+    gap: 5px;
+    font-size: 20px;
 }
 
-.star {
-    font-size: 18px;
-    line-height: 1;
+.star-filled {
+    color: #FFD700;
 }
 
-.star.filled {
-    color: var(--star-filled);
-    text-shadow: 0 0 6px rgba(255, 216, 107, 0.6);
+.star-empty {
+    color: #DDD;
 }
 
-.star.empty {
-    color: var(--star-empty);
+/* Hover Effect - Elongate Card */
+.song-card.hovered {
+    transform: translateX(20px) scale(1.02);
 }
 
-/* =========================================
-   ACTIVE / SELECTED SONG
-   ========================================= */
+/* ===================================
+   8. SONG DETAILS SECTION (RIGHT 30%)
+   =================================== */
 
-.song-card.active {
-    background: linear-gradient(
-        135deg,
-        rgba(255, 154, 203, 0.35),
-        rgba(187, 170, 255, 0.35)
-    );
+.song-details-section {
+    flex: 0 0 30%;
 }
 
-/* =========================================
-   EMPTY STATE
-   ========================================= */
+.info-song {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-.song-list-empty {
+/* Placeholder */
+.placeholder-message {
     text-align: center;
-    padding: 40px 20px;
-    color: var(--color-text-muted);
-    font-size: 14px;
+    color: #999;
 }
 
-/* =========================================
-   RESPONSIVE
-   ========================================= */
+.placeholder-icon {
+    font-size: 64px;
+    color: #DDD;
+    margin-bottom: 20px;
+}
 
-@media (max-width: 900px) {
-    .index-container {
+.placeholder-text {
+    font-size: 18px;
+    color: #999;
+}
+
+/* Song Details Content */
+.song-details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.detail-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 1px;
+}
+
+.detail-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.difficulty-stars,
+.best-score-stars {
+    display: flex;
+    gap: 5px;
+    font-size: 20px;
+}
+
+/* Play Button */
+.play-button-container {
+    margin-top: 20px;
+}
+
+.btn-play {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #FFB6C1, #E6E6FA);
+    border: none;
+    border-radius: 12px;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-play:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(255, 182, 193, 0.4);
+}
+
+.btn-play i {
+    font-size: 20px;
+}
+
+/* ===================================
+   9. LOADING OVERLAY
+   =================================== */
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #FFB6C1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-overlay .loading-text {
+    position: static;
+    font-size: 20px;
+    color: #FFF;
+}
+
+/* ===================================
+   10. SKIP LINK (ACCESSIBILITY)
+   =================================== */
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #FFB6C1;
+    color: #000;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ===================================
+   11. TOOLTIP CONTAINER
+   =================================== */
+
+.tooltip-container {
+    position: absolute;
+    background: #333;
+    color: #FFF;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.tooltip-container.show {
+    opacity: 1;
+}
+
+/* ===================================
+   12. RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .content-wrapper {
         flex-direction: column;
     }
-
-    .song-list-container {
-        width: 100%;
-        max-height: 60vh;
-    }
-
-    .song-detail-container {
-        padding-left: 0;
-        margin-top: 40px;
+    
+    .song-list-section,
+    .song-details-section {
+        flex: 0 0 100%;
     }
 }
 
-@media (max-width: 480px) {
-    .song-card {
-        padding: 12px;
+/* Mobile */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
     }
-
-    .song-disk {
-        width: 52px;
-        height: 52px;
+    
+    .page-title {
+        font-size: 22px;
     }
-
+    
+    .content-wrapper {
+        padding: 0 20px;
+    }
+    
     .song-name {
-        font-size: 14px;
+        font-size: 18px;
+    }
+    
+    .detail-value {
+        font-size: 16px;
     }
 }
