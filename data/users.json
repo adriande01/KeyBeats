@@ -20,5 +20,16 @@
         "completedSongs": 0,
         "createdAt": "2026-01-21T13:13:25+01:00",
         "progress": []
+    },
+    {
+        "id": "user_1769022393_179bdbd7",
+        "nickname": "adri",
+        "email": "adri@gmail.com",
+        "password": "$2y$10$pwjr4p3dSqBgoCIdgcf1Nukr\/.8rxr8CALqhMnEJibcBRZTLBlQaO",
+        "avatar": "av0",
+        "level": 0,
+        "completedSongs": 0,
+        "createdAt": "2026-01-21T20:06:33+01:00",
+        "progress": []
     }
 ]
