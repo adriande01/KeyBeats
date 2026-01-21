@@ -1,1 +1,13 @@
-[]
+[
+    {
+        "id": "user_1768988217_8b4263ec",
+        "nickname": "adrian",
+        "email": "adrian@gmail.com",
+        "password": "$2y$10$eYPIgRChJmkvugvlQgT8HuNUl3tsgAwciLK1vu.mK3C26mKxz4Fzu",
+        "avatar": "av0",
+        "level": 0,
+        "completedSongs": 0,
+        "createdAt": "2026-01-21T10:36:57+01:00",
+        "progress": []
+    }
+]

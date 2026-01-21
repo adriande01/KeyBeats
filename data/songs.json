@@ -1,0 +1,55 @@
+[
+  {
+    "id": "song_doom",
+    "name": "DOOM",
+    "author": "Mick Gordon",
+    "duration": "03:45",
+    "maxStars": 3,
+    "coverImage": "assets/covers/doom.jpg",
+    "audioFile": "assets/songs/doom.mp3",
+    "beats": [
+      {
+        "id": "beat_doom_1",
+        "songId": "song_doom",
+        "timestamp": 15.0,
+        "keys": "A",
+        "order": 1
+      },
+      {
+        "id": "beat_doom_2",
+        "songId": "song_doom",
+        "timestamp": 17.5,
+        "keys": "Ctrl+D",
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": "song_x",
+    "name": "X",
+    "author": "KeyBeats",
+    "duration": "02:30",
+    "maxStars": 2,
+    "coverImage": "assets/covers/x.jpg",
+    "audioFile": "assets/songs/x.mp3",
+    "beats": [
+      {
+        "id": "beat_x_1",
+        "songId": "song_x",
+        "timestamp": 10.0,
+        "keys": "S",
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "song_y",
+    "name": "Y",
+    "author": "KeyBeats",
+    "duration": "04:00",
+    "maxStars": 3,
+    "coverImage": "assets/covers/y.jpg",
+    "audioFile": "assets/songs/y.mp3",
+    "beats": []
+  }
+]

@@ -435,15 +435,8 @@ function handleLoginResponse(response) {
 }
 
 function createSession(user) {
-    // Store session in cookie (7 days)
-    const sessionData = {
-        userId: user.id,
-        nickname: user.nickname,
-        avatar: user.avatar,
-        level: user.level
-    };
-    
-    setCookie('keybeats_session', JSON.stringify(sessionData), 7);
+    // Store ONLY userId in cookie (7 days)
+    setCookie('keybeats_session', user.id, 7);
 }
 
 // ===================================
