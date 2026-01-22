@@ -7,22 +7,7 @@
     "maxStars": 3,
     "coverImage": "assets/covers/doom.jpg",
     "audioFile": "assets/songs/doom.mp3",
-    "beats": [
-      {
-        "id": "beat_doom_1",
-        "songId": "song_doom",
-        "timestamp": 15.0,
-        "keys": "A",
-        "order": 1
-      },
-      {
-        "id": "beat_doom_2",
-        "songId": "song_doom",
-        "timestamp": 17.5,
-        "keys": "Ctrl+D",
-        "order": 2
-      }
-    ]
+    "beats": []
   },
   {
     "id": "song_x",
@@ -50,6 +35,16 @@
     "maxStars": 3,
     "coverImage": "assets/covers/y.jpg",
     "audioFile": "assets/songs/y.mp3",
+    "beats": []
+  },
+  {
+    "id": "song_minecraft",
+    "name": "Minecrfat",
+    "author": "KeyBeats",
+    "duration": "00:24",
+    "maxStars": 1,
+    "coverImage": "assets/covers/y.jpg",
+    "audioFile": "assets/songs/minecraft(ejemplo).mp3",
     "beats": []
   }
 ]
