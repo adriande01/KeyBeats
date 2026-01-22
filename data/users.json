@@ -5,10 +5,27 @@
         "email": "adrian@gmail.com",
         "password": "$2y$10$eYPIgRChJmkvugvlQgT8HuNUl3tsgAwciLK1vu.mK3C26mKxz4Fzu",
         "avatar": "av0",
-        "level": 0,
-        "completedSongs": 0,
+        "level": 2,
+        "completedSongs": 2,
         "createdAt": "2026-01-21T10:36:57+01:00",
-        "progress": []
+        "progress": [
+            {
+                "id": "progress_1769114199_689147be",
+                "userId": "user_1768988217_8b4263ec",
+                "songId": "song_minecraft",
+                "starsEarned": 1,
+                "lastPlayed": "2026-01-22T21:52:03+01:00",
+                "attempts": 3
+            },
+            {
+                "id": "progress_1769115464_61e7d0ab",
+                "userId": "user_1768988217_8b4263ec",
+                "songId": "song_doom",
+                "starsEarned": 1,
+                "lastPlayed": "2026-01-22T21:57:44+01:00",
+                "attempts": 1
+            }
+        ]
     },
     {
         "id": "user_1768997605_ef95b5ad",

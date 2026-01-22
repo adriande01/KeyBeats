@@ -3,8 +3,8 @@
  *
  * Requirements:
  *  - api/get-songs.php     (provided)
- *  - api/get-user-progress.php  (we provided above)
- *  - api/save-progress.php  (you already had)
+ *  - api/get-user-progress.php  (provided)
+ *  - api/save-progress.php  (provided)
  *  - cookie "keybeats_session" must include either the userId string or a JSON object containing userId
  *
  * Behavior:
@@ -13,6 +13,7 @@
  *  - run gameplay (runStars starts at 0)
  *  - accept keyboard input (single keys and modifier combos like "Ctrl+D")
  *  - at song end, POST to api/save-progress.php with userId, songId, starsEarned
+ *  - dynamically set background video based on song
  */
 
 (function () {
@@ -110,6 +111,18 @@
   const $modalStarsEarned = $('#modalStarsEarned');
   const $modalMaxStars = $('#modalMaxStars');
 
+  // ---------- Set background video based on song ----------
+  function setBackgroundVideo(videoPath) {
+    const $bgVideo = $('#backgroundVideo');
+    if ($bgVideo.length && videoPath) {
+      // Set new video source
+      $bgVideo.attr('src', videoPath);
+      // Reload and play video
+      $bgVideo[0].load();
+      $bgVideo[0].play();
+    }
+  }
+
   // ---------- Load song and user then start ----------
   $(document).ready(() => {
     userId = getSessionUserId();
@@ -155,6 +168,11 @@
       $modalAuthor.text(currentSong.author || '');
       $modalMaxStars.text(maxStars);
 
+      // Set background video (coverImage contains video path)
+      if (currentSong.coverImage) {
+        setBackgroundVideo(currentSong.coverImage);
+      }
+
       // set audio
       audio = document.getElementById('audioPlayer');
       if (!audio) {
@@ -189,7 +207,6 @@
         const prog = progressArr.find(p => p.songId === currentSong.id);
         const recordStars = prog ? (prog.starsEarned || 0) : 0;
         // show record in header (if you have a spot) - optional
-        // render record stars (we keep run stars separate)
         // but here we simply render 0-run stars initially:
         renderRunStars(0);
       }
@@ -279,16 +296,19 @@
   function applySuccess() {
     runStars = Math.min(runStars + 1, maxStars);
     renderRunStars(runStars);
-    // small visual feedback (could add animation)
-    $beatBox.addClass('success');
-    setTimeout(() => $beatBox.removeClass('success'), 180);
+    
+    // CAMBIO 2: Borde VERDE cuando acierta
+    $beatBox.removeClass('beat-error').addClass('beat-success');
+    setTimeout(() => $beatBox.removeClass('beat-success'), 300);
   }
 
   function applyFail() {
     runStars = Math.max(0, runStars - 1);
     renderRunStars(runStars);
-    $beatBox.addClass('fail');
-    setTimeout(() => $beatBox.removeClass('fail'), 180);
+    
+    // CAMBIO 2: Borde ROJO cuando falla
+    $beatBox.removeClass('beat-success').addClass('beat-error');
+    setTimeout(() => $beatBox.removeClass('beat-error'), 300);
   }
 
   // ---------- advance beat state ----------
@@ -331,38 +351,32 @@
       data: postData
     }).done(function (res) {
       // res: { success: true, level: ..., completedSongs: ... } on success
-      // Show game-over modal with final info.
-      const finalStars = runStars;
-      $modalStars.empty();
-      for (let i = 0; i < maxStars; i++) {
-        if (i < finalStars) {
-          $modalStars.append('<i class="fas fa-star star-filled"></i>');
-        } else {
-          $modalStars.append('<i class="far fa-star star-empty"></i>');
-        }
-      }
-      $modalStarsEarned.text(finalStars);
-      $modalMaxStars.text(maxStars);
-
-      // show modal
-      $modal.fadeIn(240);
+      // CAMBIO 3: Modal más bonito con iconos de estrella
+      showGameOverModal(runStars);
     }).fail(function () {
       // even if save fails, show modal so user sees result (but notify)
-      const finalStars = runStars;
-      $modalStars.empty();
-      for (let i = 0; i < maxStars; i++) {
-        if (i < finalStars) {
-          $modalStars.append('<i class="fas fa-star star-filled"></i>');
-        } else {
-          $modalStars.append('<i class="far fa-star star-empty"></i>');
-        }
-      }
-      $modalStarsEarned.text(finalStars);
-      $modalMaxStars.text(maxStars);
-
-      $modal.fadeIn(240);
+      showGameOverModal(runStars);
       console.warn('save-progress request failed.');
     });
+  }
+
+  // ---------- CAMBIO 3: Show game over modal with stars icons ----------
+  function showGameOverModal(finalStars) {
+    // Clear and render stars with icons
+    $modalStars.empty();
+    for (let i = 0; i < maxStars; i++) {
+      if (i < finalStars) {
+        $modalStars.append('<i class="fas fa-star star-filled"></i>');
+      } else {
+        $modalStars.append('<i class="far fa-star star-empty"></i>');
+      }
+    }
+    
+    // Hide text score (we only show stars icons now)
+    $('.modal-score-text').hide();
+    
+    // Show modal
+    $modal.fadeIn(240);
   }
 
   // ---------- modal main menu button ----------

@@ -1,79 +1,78 @@
-[
-  {
-    "id": "song_doom",
-    "name": "DOOM",
-    "author": "Mick Gordon",
-    "duration": "03:45",
-    "maxStars": 3,
-    "coverImage": "assets/covers/doom.jpg",
-    "audioFile": "assets/songs/doom.mp3",
-    "beats": [
-      {
-        "id": "beat_doom_1",
-        "songId": "song_doom",
-        "timestamp": 10.0,
-        "keys": "S",
-        "order": 1
-      },
-      {
-        "id": "beat_doom_2",
-        "songId": "song_doom",
-        "timestamp": 15.0,
-        "keys": "A",
-        "order": 1
-      },
-      {
-        "id": "beat_doom_3",
-        "songId": "song_doom",
-        "timestamp": 16.0,
-        "keys": "D",
-        "order": 1
-      },
-      {
-        "id": "beat_doom_4",
-        "songId": "song_doom",
-        "timestamp": 20.0,
-        "keys": "CTRL + S",
-        "order": 1
-      }
-    ]
-  },
-  {
-    "id": "song_x",
-    "name": "X",
+[{
+        "id": "song_doom",
+        "name": "DOOM",
+        "author": "Mick Gordon",
+        "duration": "02:45",
+        "maxStars": 3,
+        "coverImage": "assets/backgrounds/game-bg.mp4",
+        "audioFile": "assets/songs/doom.mp3",
+        "beats": [
+            { "id": "beat_doom_1", "songId": "song_doom", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_doom_2", "songId": "song_doom", "timestamp": 15.0, "keys": "A", "order": 2 },
+            { "id": "beat_doom_3", "songId": "song_doom", "timestamp": 16.0, "keys": "D", "order": 3 },
+            { "id": "beat_doom_4", "songId": "song_doom", "timestamp": 20.0, "keys": "CTRL", "order": 4 },
+            { "id": "beat_doom_5", "songId": "song_doom", "timestamp": 30.0, "keys": "W", "order": 5 },
+            { "id": "beat_doom_6", "songId": "song_doom", "timestamp": 40.0, "keys": "S", "order": 6 },
+            { "id": "beat_doom_7", "songId": "song_doom", "timestamp": 70.0, "keys": "W", "order": 7 },
+            { "id": "beat_doom_8", "songId": "song_doom", "timestamp": 71.0, "keys": "SPACE", "order": 8 },
+            { "id": "beat_doom_9", "songId": "song_doom", "timestamp": 72.0, "keys": "S", "order": 9 },
+            { "id": "beat_doom_10", "songId": "song_doom", "timestamp": 73.5, "keys": "W", "order": 10 },
+            { "id": "beat_doom_11", "songId": "song_doom", "timestamp": 74.0, "keys": "SHIFT", "order": 11 },
+            { "id": "beat_doom_12", "songId": "song_doom", "timestamp": 75.0, "keys": "D", "order": 12 },
+            { "id": "beat_doom_13", "songId": "song_doom", "timestamp": 76.0, "keys": "A", "order": 13 },
+            { "id": "beat_doom_14", "songId": "song_doom", "timestamp": 80.0, "keys": "CTRL", "order": 14 },
+            { "id": "beat_doom_15", "songId": "song_doom", "timestamp": 85.0, "keys": "ENTER", "order": 15 },
+            { "id": "beat_doom_16", "songId": "song_doom", "timestamp": 85.5, "keys": "P", "order": 16 },
+            { "id": "beat_doom_16", "songId": "song_doom", "timestamp": 87.5, "keys": "V", "order": 17 },
+            { "id": "beat_doom_16", "songId": "song_doom", "timestamp": 90.0, "keys": "Z", "order": 18 }
+
+        ]
+    },
+{
+    "id": "song_pokemon",
+    "name": "Pokemon",
     "author": "KeyBeats",
-    "duration": "02:30",
+    "duration": "01:30",
     "maxStars": 2,
-    "coverImage": "assets/covers/x.jpg",
-    "audioFile": "assets/songs/x.mp3",
-    "beats": [
-      {
-        "id": "beat_x_1",
-        "songId": "song_x",
-        "timestamp": 10.0,
-        "keys": "S",
-        "order": 1
-      }
-    ]
-  },
-  {
-    "id": "song_y",
-    "name": "Y",
-    "author": "KeyBeats",
-    "duration": "04:00",
-    "maxStars": 3,
-    "coverImage": "assets/covers/y.jpg",
-    "audioFile": "assets/songs/y.mp3",
+    "coverImage": "assets/backgrounds/pokemon-bg.mp4",
+    "audioFile": "assets/songs/pokemon.mp3",
     "beats": []
-  },
-  {
-    "id": "song_minecraft",
-    "name": "Minecrfat",
-    "author": "KeyBeats",
-    "duration": "00:24",
-    "maxStars": 1,
-    "coverImage": "assets/covers/y.jpg",
-    "audioFile": "assets/songs/minecraft(ejemplo).mp3",
-    "beats": []
-  }
+},
+    {
+        "id": "song_minecraft",
+        "name": "Minecrfat",
+        "author": "KeyBeats",
+        "duration": "01:02",
+        "maxStars": 1,
+        "coverImage": "assets/backgrounds/minecraft-bg.mp4",
+        "audioFile": "assets/songs/minecraft.mp3",
+        "beats": [
+            { "id": "beat_minecraft_1", "songId": "song_minecraft", "timestamp": 6.0, "keys": "A", "order": 1 },
+            { "id": "beat_minecraft_2", "songId": "song_minecraft", "timestamp": 9.0, "keys": "D", "order": 1 },
+            { "id": "beat_minecraft_3", "songId": "song_minecraft", "timestamp": 13.0, "keys": "F", "order": 1 },
+            { "id": "beat_minecraft_4", "songId": "song_minecraft", "timestamp": 16.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_5", "songId": "song_minecraft", "timestamp": 22.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_6", "songId": "song_minecraft", "timestamp": 26.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_7", "songId": "song_minecraft", "timestamp": 33.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_8", "songId": "song_minecraft", "timestamp": 37.0, "keys": "S", "order": 12 },
+            { "id": "beat_minecraft_13", "songId": "song_minecraft", "timestamp": 54.0, "keys": "S", "order": 13 },
+            { "id": "beat_minecraft_14", "songId": "song_minecraft", "timestamp": 56.0, "keys": "S", "order": 14 },
+            { "id": "beat_minecraft_15", "songId": "song_minecraft", "timestamp": 60.0, "keys": "S", "order": 15 },
+            { "id": "beat_minecraft_9", "songId": "song_minecraft", "timestamp": 41.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_10", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_11", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_12", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_13", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_14", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_15", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_16", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_17", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_18", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_19", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_20", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_21", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 },
+            { "id": "beat_minecraft_22", "songId": "song_minecraft", "timestamp": 10.0, "keys": "S", "order": 1 }
+
+        ]
+    }
 ]

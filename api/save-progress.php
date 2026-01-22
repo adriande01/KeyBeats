@@ -49,36 +49,29 @@ foreach ($users[$userIndex]['progress'] as $index => $prog) {
     }
 }
 
-// IF 0 STARS, DELETE PROGRESS
-if ($starsEarned === 0) {
-    if ($progressIndex !== null) {
-        array_splice($users[$userIndex]['progress'], $progressIndex, 1);
+// UPDATE OR CREATE PROGRESS
+if ($progressIndex !== null) {
+    // EXISTING PROGRESS - ALWAYS INCREMENT ATTEMPTS
+    $users[$userIndex]['progress'][$progressIndex]['attempts']++;
+    $users[$userIndex]['progress'][$progressIndex]['lastPlayed'] = date('c');
+    
+    // ONLY UPDATE STARS IF NEW SCORE IS BETTER
+    if ($starsEarned > $users[$userIndex]['progress'][$progressIndex]['starsEarned']) {
+        $users[$userIndex]['progress'][$progressIndex]['starsEarned'] = $starsEarned;
     }
+    // If starsEarned <= existing, keep old stars (don't update)
+    
 } else {
-    // UPDATE OR CREATE PROGRESS
-    if ($progressIndex !== null) {
-        // ONLY UPDATE IF NEW STARS > OLD STARS
-        if ($starsEarned > $users[$userIndex]['progress'][$progressIndex]['starsEarned']) {
-            $users[$userIndex]['progress'][$progressIndex]['starsEarned'] = $starsEarned;
-            $users[$userIndex]['progress'][$progressIndex]['lastPlayed'] = date('c');
-            $users[$userIndex]['progress'][$progressIndex]['attempts']++;
-        } else {
-            // JUST INCREMENT ATTEMPTS
-            $users[$userIndex]['progress'][$progressIndex]['attempts']++;
-            $users[$userIndex]['progress'][$progressIndex]['lastPlayed'] = date('c');
-        }
-    } else {
-        // CREATE NEW PROGRESS
-        $progressId = "progress_" . time() . "_" . bin2hex(random_bytes(4));
-        $users[$userIndex]['progress'][] = [
-            "id" => $progressId,
-            "userId" => $userId,
-            "songId" => $songId,
-            "starsEarned" => $starsEarned,
-            "lastPlayed" => date('c'),
-            "attempts" => 1
-        ];
-    }
+    // NEW PROGRESS - CREATE ENTRY
+    $progressId = "progress_" . time() . "_" . bin2hex(random_bytes(4));
+    $users[$userIndex]['progress'][] = [
+        "id" => $progressId,
+        "userId" => $userId,
+        "songId" => $songId,
+        "starsEarned" => $starsEarned,
+        "lastPlayed" => date('c'),
+        "attempts" => 1
+    ];
 }
 
 // RECALCULATE LEVEL AND COMPLETED SONGS
