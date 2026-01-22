@@ -4,10 +4,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KeyBeats - Play</title>
+    <meta name="description" content="KeyBeats - Play your selected song">
+    <title>KeyBeats - Game</title>
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/game.css">
+
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- User Model -->
+    <script src="js/models/User.js"></script>
+
+    <!-- Song Model -->
+    <script src="js/models/Song.js"></script>
+
+    <!-- Beat Model -->
+    <script src="js/models/Beat.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="js/game.js" defer></script>
 </head>
 
 <body>
+
+    <!-- Background Layer (video/gif/image) -->
+    <div class="background-layer" id="backgroundLayer">
+        <!-- Video background (fallback to image if video not available) -->
+        <video class="background-video" id="backgroundVideo" autoplay loop muted playsinline>
+            <source src="assets/backgrounds/game-bg.mp4" type="video/mp4">
+            <source src="assets/backgrounds/game-bg.webm" type="video/webm">
+            <!-- Fallback to image if video not supported -->
+        </video>
+        <!-- Fallback image -->
+        <div class="background-image" id="backgroundImage"></div>
+    </div>
+
+    <!-- Main Game Container -->
+    <div class="game-container" id="gameContainer">
+
+        <!-- Top Bar -->
+        <div class="game-top-bar">
+
+            <!-- Left: Stars Progress -->
+            <div class="stars-progress" id="starsProgress">
+                <!-- Stars will be dynamically generated here -->
+                <div class="stars-earned" id="starsEarned">
+                    <i class="fas fa-star star-filled"></i>
+                    <i class="far fa-star star-empty"></i>
+                    <i class="far fa-star star-empty"></i>
+                </div>
+            </div>
+
+            <!-- Center: Timer -->
+            <div class="timer" id="timer">
+                <span class="timer-display" id="timerDisplay">00:00</span>
+            </div>
+
+            <!-- Right: Song Name -->
+            <div class="song-name" id="songName">
+                DOOM
+            </div>
+
+        </div>
+
+        <!-- Beat Display Area (Bottom Center) -->
+        <div class="beat-display-area">
+            <!-- Beat Key Combination Box -->
+            <div class="beat-box" id="beatBox" style="display: none;">
+                <span class="beat-keys" id="beatKeys">CTRL + D</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Audio Player (Hidden) -->
+    <audio id="audioPlayer" preload="auto">
+        <source src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalSongName">DOOM</h2>
+                <p class="modal-author" id="modalSongAuthor">Mick Gordon</p>
+            </div>
+
+            <div class="modal-body">
+                <!-- Stars Earned Display -->
+                <div class="modal-stars" id="modalStars">
+                    <i class="fas fa-star star-filled"></i>
+                    <i class="fas fa-star star-filled"></i>
+                    <i class="far fa-star star-empty"></i>
+                </div>
+
+                <p class="modal-score-text">
+                    <span id="modalStarsEarned">2</span> / <span id="modalMaxStars">3</span> Stars
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-main-menu" id="btnMainMenu">
+                    <i class="fas fa-home"></i>
+                    Main Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="spinner"></div>
+        <p class="loading-text">Loading song...</p>
+    </div>
+
+    <!-- Accessibility: Skip to main content -->
+    <a href="#gameContainer" class="skip-link">Skip to game</a>
 
 </body>
 

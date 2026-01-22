@@ -7,7 +7,36 @@
     "maxStars": 3,
     "coverImage": "assets/covers/doom.jpg",
     "audioFile": "assets/songs/doom.mp3",
-    "beats": []
+    "beats": [
+      {
+        "id": "beat_doom_1",
+        "songId": "song_doom",
+        "timestamp": 10.0,
+        "keys": "S",
+        "order": 1
+      },
+      {
+        "id": "beat_doom_2",
+        "songId": "song_doom",
+        "timestamp": 15.0,
+        "keys": "A",
+        "order": 1
+      },
+      {
+        "id": "beat_doom_3",
+        "songId": "song_doom",
+        "timestamp": 16.0,
+        "keys": "D",
+        "order": 1
+      },
+      {
+        "id": "beat_doom_4",
+        "songId": "song_doom",
+        "timestamp": 20.0,
+        "keys": "CTRL + S",
+        "order": 1
+      }
+    ]
   },
   {
     "id": "song_x",
