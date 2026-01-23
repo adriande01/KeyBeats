@@ -119,6 +119,7 @@ body {
    =================================== */
 
 .main-container {
+    padding-top: 10px;
     width: 100%;
     min-height: 100vh;
 }
@@ -300,7 +301,7 @@ body {
     gap: 30px;
     justify-content: flex-end;
     align-items: stretch;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 110px);
 }
 
 
