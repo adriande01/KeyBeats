@@ -1,12 +1,10 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="KeyBeats - Select your song and start playing"
-    />
+    <meta name="description" content="KeyBeats - Select your song and start playing" />
     <title>KeyBeats - Home</title>
 
     <!-- CSS Stylesheets -->
@@ -19,10 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <!-- Font Awesome Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <!-- User Model -->
     <script src="js/models/User.js"></script>
@@ -35,18 +30,15 @@
 
     <!-- Custom JavaScript -->
     <script src="js/index.js" defer></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
 
-  <body>
+<body>
     <!-- Loading Animation Container (GSAP Fractal) -->
     <div class="loading-animation" id="loadingAnimation">
-      <div class="fractal-container">
-        <!-- Fractal SVG will be generated here via GSAP -->
-        <svg id="fractalSvg" width="100%" height="100%" viewBox="0 0 800 800">
+        <div class="fractal-container">
+            <!-- Fractal SVG will be generated here via GSAP -->
+            <svg id="fractalSvg" width="100%" height="100%" viewBox="0 0 800 800">
           <!-- Circle that expands (like AirPods animation) -->
           <circle
             id="fractalCircle"
@@ -54,155 +46,127 @@
             cy="400"
             r="50"
             fill="#FFB6C1"
-            opacity="0.8"
-          />
+            opacity="0.8" />
         </svg>
-        <!-- Loading text (optional) -->
-        <p class="loading-text" id="loadingText">KeyBeats</p>
-      </div>
+            <!-- Loading text (optional) -->
+            <p class="loading-text" id="loadingText">KeyBeats</p>
+        </div>
     </div>
 
     <!-- Background Layer (visible after loading animation) -->
     <div class="background-layer" id="backgroundLayer" style="display: none">
-      <!-- Solid gradient background -->
-      <div class="background-solid"></div>
+        <!-- Solid gradient background -->
+        <div class="background-solid"></div>
 
-      <!-- Animated background (GIF with pulsating beats) -->
-      <div class="background-animated">
-        <!-- Background will be styled via CSS with animated GIF -->
-      </div>
+        <!-- Animated background (GIF with pulsating beats) -->
+        <div class="background-animated">
+            <!-- Background will be styled via CSS with animated GIF -->
+        </div>
     </div>
 
     <!-- Main Content Container (visible after loading animation) -->
     <div class="main-container" id="mainContainer" style="display: none">
-      <!-- Header Component -->
-      <header class="header" id="header">
-        <!-- Left: Logo -->
-        <div class="header-left">
-          <a href="index.html" class="logo-link" aria-label="KeyBeats Home">
-            <h1 class="logo-text">KeyBeats</h1>
-          </a>
-        </div>
-
-        <!-- Center: Page Title -->
-        <div class="header-center">
-          <i class="fas fa-house"></i>
-
-          <h2 class="page-title">HOME</h2>
-        </div>
-
-        <!-- Right: User Avatar + Level -->
-        <div class="header-right">
-          <div class="user-badge-wrapper">
-            <!-- Level Star (NO clicable) -->
-            <div class="level-badge" id="levelBadge">
-              <span class="level-number" id="levelNumber">0</span>
+        <!-- Header Component -->
+        <header class="header" id="header">
+            <!-- Left: Logo -->
+            <div class="header-left">
+                <a href="index.html" class="logo-link" aria-label="KeyBeats Home">
+                    <h1 class="logo-text">KeyBeats</h1>
+                </a>
             </div>
 
-            <!-- User info (clicable) -->
-            <div class="user-info" id="userInfo">
-              <div class="avatar-container">
-                <img
-                  src="assets/avatars/av0.png"
-                  alt="User avatar"
-                  class="avatar-image"
-                  id="headerAvatar"
-                />
-              </div>
+            <!-- Center: Page Title -->
+            <div class="header-center">
+                <i class="fas fa-house"></i>
+
+                <h2 class="page-title">HOME</h2>
             </div>
-          </div>
-        </div>
-      </header>
 
-      <!-- Main Content Area -->
-      <div class="content-wrapper">
-        <!-- Left Side: Song List (60% width) -->
-        <div class="song-list-section">
-          <div class="song-container" id="songContainer">
-            <!-- Song cards will be dynamically generated here -->
-          </div>
-        </div>
-
-        <div class=""></div>
-        <!-- Right Side: Song Details Panel (30% width) -->
-        <div class="song-details-section">
-          <div class="info-song" id="infoSong">
-            <div class="details-info-container">
-              <!-- Placeholder when no song is selected -->
-              <div class="placeholder-message" id="placeholderMessage">
-                <i class="fas fa-hand-pointer placeholder-icon"></i>
-                <p class="placeholder-text">Select a song to view details</p>
-              </div>
-
-              <!-- Song Details (visible when song is selected) -->
-              <div
-                class="song-details-content"
-                id="songDetailsContent"
-                style="display: none"
-              >
-                <!-- Song Name -->
-                <div class="detail-group">
-                  <label class="detail-label" id="detailNameLbl">NAME</label>
-                  <div class="detail-value" id="detailName">-</div>
-                </div>
-
-                <div class="details-row">
-                  <!-- Difficulty (Max Stars) -->
-                  <div class="detail-group">
-                    <label class="detail-label" id="difficultyLbl"
-                      >DIFFICULTY</label
-                    >
-                    <div
-                      class="detail-value difficulty-stars"
-                      id="detailDifficulty"
-                    >
-                      <!-- Stars will be generated dynamically -->
+            <!-- Right: User Avatar + Level -->
+            <div class="header-right">
+                <div class="user-badge-wrapper">
+                    <!-- Level Star (NO clicable) -->
+                    <div class="level-badge" id="levelBadge">
+                        <span class="level-number" id="levelNumber">0</span>
                     </div>
-                  </div>
 
-                  <!-- Attempts (Number of times played) -->
-                  <div class="detail-group">
-                    <label class="detail-label" id="detailAttemptsLbl"
-                      >ATTEMPTS</label
-                    >
-                    <div class="detail-value" id="detailAttempts">0</div>
-                  </div>
+                    <!-- User info (clicable) -->
+                    <div class="user-info" id="userInfo">
+                        <div class="avatar-container">
+                            <img src="assets/avatars/av0.png" alt="User avatar" class="avatar-image" id="headerAvatar" />
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </header>
 
-                <!-- Play Button -->
-                <div class="play-button-container">
-                  <button
-                    type="button"
-                    class="btn-play"
-                    id="playBtn"
-                    aria-label="Play this song"
-                  >
+        <!-- Main Content Area -->
+        <div class="content-wrapper">
+            <!-- Left Side: Song List (60% width) -->
+            <div class="song-list-section">
+                <div class="song-container" id="songContainer">
+                    <!-- Song cards will be dynamically generated here -->
+                </div>
+            </div>
+
+            <div class="song-details-section">
+                <div class="info-song" id="infoSong">
+                    <div class="details-info-container">
+                        <!-- Placeholder when no song is selected -->
+                        <div class="placeholder-message" id="placeholderMessage">
+                            <i class="fas fa-hand-pointer placeholder-icon"></i>
+                            <p class="placeholder-text">Select a song to view details</p>
+                        </div>
+
+                        <!-- Song Details (visible when song is selected) -->
+                        <div class="song-details-content" id="songDetailsContent" style="display: none">
+                            <!-- Song Name -->
+                            <div class="detail-group">
+                                <label class="detail-label" id="detailNameLbl">NAME</label>
+                                <div class="detail-value" id="detailName">-</div>
+                            </div>
+
+                            <div class="details-row">
+                                <!-- Difficulty (Max Stars) -->
+                                <div class="detail-group">
+                                    <label class="detail-label" id="difficultyLbl">DIFFICULTY</label>
+                                    <div class="detail-value difficulty-stars" id="detailDifficulty">
+                                        <!-- Stars will be generated dynamically -->
+                                    </div>
+                                </div>
+
+                                <!-- Attempts (Number of times played) -->
+                                <div class="detail-group">
+                                    <label class="detail-label" id="detailAttemptsLbl">ATTEMPTS</label>
+                                    <div class="detail-value" id="detailAttempts">0</div>
+                                </div>
+                            </div>
+
+                            <!-- Play Button -->
+                            <div class="play-button-container">
+                                <button type="button" class="btn-play" id="playBtn" aria-label="Play this song">
                     <i class="fas fa-play"></i>
                     PLAY
                   </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
     <!-- Loading Overlay (for AJAX requests) -->
     <div class="loading-overlay" id="loadingOverlay" style="display: none">
-      <div class="spinner"></div>
-      <p class="loading-text">Loading songs...</p>
+        <div class="spinner"></div>
+        <p class="loading-text">Loading songs...</p>
     </div>
 
     <!-- Accessibility: Skip to main content -->
     <a href="#songContainer" class="skip-link">Skip to song list</a>
 
     <!-- Tooltip container for dynamic tooltips -->
-    <div
-      id="tooltipContainer"
-      class="tooltip-container"
-      role="tooltip"
-      style="display: none"
-    ></div>
-  </body>
+    <div id="tooltipContainer" class="tooltip-container" role="tooltip" style="display: none"></div>
+</body>
+
 </html>

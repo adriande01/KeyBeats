@@ -16,6 +16,8 @@ let selectedSongId = null; // Currently selected song ID
 // SESSION MANAGEMENT
 // ============================================================================
 
+//Hola adri sepio
+
 /**
  * Get cookie value by name
  * @param {string} name - Cookie name
