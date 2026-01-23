@@ -224,15 +224,16 @@ body {
     pointer-events: none;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #ffb6c1, #e6b3ff);
+    background: radial-gradient(circle closest-side, rgb(255, 255, 87) 20%, rgb(255, 0, 149) 65%);
     clip-path: polygon( 50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
     font-size: 16px;
-    color: #5a2d82;
+    color: indigo;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    transform: scale(1.1);
 }
 
 .level-star {
@@ -240,7 +241,9 @@ body {
 }
 
 .level-number {
+    padding: 4px;
     font-size: 18px;
+    transform: scale(0.9);
 }
 
 
