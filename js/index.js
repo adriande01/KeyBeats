@@ -172,13 +172,13 @@ function loadUserData(userId) {
                 // Load songs after user data is loaded
                 loadSongs();
             } else {
-                alert("Failed to load user data. Please login again.");
+                alert(i18next.t('errors.loadUserData')); // i18n support added
                 window.location.href = "login.html";
             }
         },
         error: function(xhr, status, error) {
             console.error("Error loading user data:", error);
-            alert("An error occurred. Please try again.");
+            alert(i18next.t('errors.loadUserDataError')); // i18n support added
             window.location.href = "login.html";
         },
     });
@@ -206,13 +206,13 @@ function loadSongs() {
                 // Hide loading overlay
                 $("#loadingOverlay").fadeOut(200);
             } else {
-                alert("Failed to load songs. Please refresh the page.");
+                alert(i18next.t('errors.loadSongsError')); // i18n support added
                 $("#loadingOverlay").fadeOut(200);
             }
         },
         error: function(xhr, status, error) {
             console.error("Error loading songs:", error);
-            alert("An error occurred while loading songs.");
+            alert(i18next.t('errors.loadSongs')); // i18n support added
             $("#loadingOverlay").fadeOut(200);
         },
     });
@@ -418,7 +418,7 @@ function updateDetailsPanel(songId) {
  */
 function handlePlayButtonClick() {
     if (!selectedSongId) {
-        alert("Please select a song first.");
+        alert(i18next.t('home.selectSongAlert')); // i18n support added
         return;
     }
 

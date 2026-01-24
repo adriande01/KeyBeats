@@ -1,0 +1,132 @@
+{
+    "app": {
+        "name": "KeyBeats"
+    },
+    "meta": {
+        "home": {
+            "title": "KeyBeats - Startseite",
+            "description": "KeyBeats - Wähle deinen Song und beginne zu spielen"
+        },
+        "login": {
+            "title": "KeyBeats - Anmeldung",
+            "description": "KeyBeats - Melde dich bei deinem Konto an"
+        },
+        "register": {
+            "title": "KeyBeats - Registrierung",
+            "description": "KeyBeats - Erstelle dein Konto und starte deine Rhythmusreise"
+        }
+    },
+    "common": {
+        "back": "Zurück",
+        "next": "Weiter",
+        "play": "SPIELEN",
+        "skipToContent": "Zum Anmeldeformular springen",
+        "skipSongs": "Zur Songliste springen",
+        "selectLanguage": "Sprache"
+    },
+    "login": {
+        "pageTitle": "KeyBeats - Anmeldung",
+        "subtitle": "Melde dich bei deinem Konto an",
+        "emailLabel": "E-Mail",
+        "emailPlaceholder": "Gib deine E-Mail ein",
+        "emailTooltip": "Deine bei KeyBeats registrierte E-Mail-Adresse",
+        "emailHelp": "Wir prüfen, ob diese E-Mail registriert ist",
+        "emailAriaLabel": "E-Mail-Informationen",
+        "passwordLabel": "Passwort",
+        "passwordPlaceholder": "Gib dein Passwort ein",
+        "passwordTooltip": "Dein Passwort ist groß-/kleinschreibungsempfindlich",
+        "passwordHelp": "Gib das Passwort für dieses Konto ein",
+        "passwordAriaLabel": "Passwort-Informationen",
+        "submit": "Anmelden",
+        "submitAriaLabel": "Bei deinem Konto anmelden",
+        "loading": "Anmeldung wird durchgeführt...",
+        "password": {
+            "show": "Passwort anzeigen",
+            "hide": "Passwort verbergen"
+        },
+        "success": "Erfolgreich angemeldet!",
+        "errors": {
+            "incorrectPassword": "Falsches Passwort",
+            "emailNotRegistered": "E-Mail ist nicht registriert",
+            "generic": "Ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+            "connection": "Keine Verbindung zum Server möglich"
+        },
+        "validation": {
+            "emailRequired": "E-Mail ist erforderlich",
+            "emailInvalid": "Bitte gib eine gültige E-Mail ein",
+            "passwordRequired": "Passwort ist erforderlich"
+        },
+        "noAccount": "Noch kein Konto?",
+        "createAccount": "Hier eines erstellen"
+    },
+    "register": {
+        "nickname": {
+            "label": "Spitzname",
+            "placeholder": "Gib deinen Spitznamen ein",
+            "help": "3-20 Zeichen erlaubt",
+            "tooltip": "Dein einzigartiger Benutzername für KeyBeats. 3-20 Zeichen, nur alphanumerisch und Unterstriche."
+        },
+        "email": {
+            "label": "E-Mail",
+            "placeholder": "Gib deine E-Mail ein",
+            "help": "Wir werden deine E-Mail niemals weitergeben"
+        },
+        "password": {
+            "label": "Passwort",
+            "placeholder": "Erstelle ein starkes Passwort",
+            "help": "Mindestens 8 Zeichen, 1 Großbuchstabe, 1 Kleinbuchstabe, 1 Zahl",
+            "weak": "Schwach"
+        },
+        "confirm": {
+            "label": "Passwort bestätigen",
+            "placeholder": "Gib dein Passwort erneut ein",
+            "help": "Passwörter müssen übereinstimmen"
+        },
+        "submit": "Konto erstellen",
+        "loading": "Konto wird erstellt...",
+        "haveAccount": "Hast du bereits ein Konto?",
+        "signIn": "Hier anmelden",
+        "avatar": {
+            "selected": "Ausgewählter Avatar",
+            "toggle": "Avatar-Auswahl umschalten",
+            "select": "Wähle deinen Avatar"
+        }
+    },
+    "navigation": {
+        "home": "Startseite",
+        "previousStep": "Zum vorherigen Schritt gehen",
+        "nextStep": "Zum nächsten Schritt gehen"
+    },
+    "user": {
+        "avatar": "Benutzeravatar"
+    },
+    "home": {
+        "title": "STARTSEITE",
+        "selectSong": "Wähle einen Song aus, um Details zu sehen",
+        "loading": "Lade Songs...",
+        "selectSongAlert": "Bitte wähle zuerst einen Song aus."
+    },
+    "song": {
+        "name": "NAME",
+        "difficulty": "SCHWIERIGKEIT",
+        "attempts": "VERSUCHE",
+        "play": "Diesen Song spielen"
+    },
+    "accessibility": {
+        "skipSongs": "Zur Songliste springen",
+        "skip": "Zum Registrierungsformular springen",
+        "skipToLoginForm": "Zum Anmeldeformular springen"
+    },
+    "errors": {
+        "loadUser": "Benutzerdaten konnten nicht geladen werden",
+        "loadUserData": "Fehler beim Laden der Benutzerdaten. Bitte melde dich erneut an.",
+        "loadUserDataError": "Ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+        "loadSongs": "Songs konnten nicht geladen werden",
+        "loadSongsError": "Fehler beim Laden der Songs. Bitte aktualisiere die Seite.",
+        "songNotFound": "Song nicht gefunden",
+        "saveProgressFailed": "Fehler beim Speichern des Fortschritts",
+        "connection": "Verbindungsfehler. Bitte versuche es erneut.",
+        "selectSong": "Bitte zuerst einen Song auswählen",
+        "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut"
+    }
+}

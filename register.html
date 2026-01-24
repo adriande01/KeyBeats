@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="KeyBeats - Create your account and start your rhythm journey" />
-    <title>KeyBeats - Register</title>
+    <meta name="description" content="KeyBeats - Create your account and start your rhythm journey" data-i18n-attr="content" data-i18n="meta.register.description" />
+    <title data-i18n="meta.register.title">KeyBeats - Register</title>
 
     <!-- CSS Stylesheets -->
     <link rel="stylesheet" href="css/register.css" />
@@ -20,299 +20,193 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <!-- Custom JavaScript -->
+    <script src="https://unpkg.com/i18next@23.2.1/i18next.min.js"></script>
+
+    <script src="https://unpkg.com/i18next-http-backend@2.5.0/i18nextHttpBackend.min.js"></script>
+
+    <script src="https://unpkg.com/i18next-browser-languagedetector@7.2.0/i18nextBrowserLanguageDetector.min.js"></script>
+
+    <script src="js/i18n.js"></script>
     <script src="js/register.js" defer></script>
+
+
 </head>
 
 <body>
 
-<!-- Background Layer -->
+    <!-- Background Layer -->
     <div class="background-layer">
-        <!-- Solid color background -->
         <div class="background-solid"></div>
-
-        <!-- Animated background (video/gif/image) -->
-        <div class="background-animated">
-            <!-- Background will be styled via CSS -->
-        </div>
+        <div class="background-animated"></div>
     </div>
 
-    <!-- Main Registration Container -->
     <div class="registration-container">
-        <!-- Registration Card (fixed size) -->
         <div class="registration-card">
-            <!-- Card Header with Logo/Title -->
             <div class="card-header">
-                <h1 class="card-title">KeyBeats</h1>
+                <h1 class="card-title" data-i18n="app.name">KeyBeats</h1>
             </div>
 
-            <!-- Registration Form -->
             <form id="registrationForm" class="registration-form" novalidate>
-                <!-- STEP 1: Avatar & Nickname -->
+
+                <!-- STEP 1 -->
                 <div class="form-step active" id="step1" data-step="1">
-                    <!-- Avatar Section -->
+
                     <div class="avatar-section">
-                        <!-- Avatar Display Circle -->
                         <div class="avatar-display" id="avatarDisplay">
-                            <img src="assets/avatars/av0.png" alt="Selected avatar" class="avatar-image" id="selectedAvatarImage" />
+                            <img src="assets/avatars/av0.png" alt="Selected avatar" data-i18n-attr="alt" data-i18n="register.avatar.selected" class="avatar-image" id="selectedAvatarImage" />
                         </div>
 
-                        <!-- Dropdown Toggle Line with Arrow -->
                         <div class="avatar-dropdown-toggle" id="avatarToggle">
                             <div class="toggle-line"></div>
-                            <button type="button" class="toggle-button" id="toggleAvatarBtn" aria-label="Toggle avatar selection" aria-expanded="false" aria-controls="avatarGrid">
+                            <button type="button" class="toggle-button" id="toggleAvatarBtn" aria-label="Toggle avatar selection" data-i18n-attr="aria-label" data-i18n="register.avatar.toggle" aria-expanded="false" aria-controls="avatarGrid">
                                 <i class="fas fa-chevron-down toggle-icon"></i>
                             </button>
                         </div>
 
-                        <!-- Avatar Grid (Hidden by default) -->
                         <div class="avatar-grid-container" id="avatarGridContainer" style="display: none">
-                            <div class="avatar-grid" id="avatarGrid" role="radiogroup" aria-label="Select your avatar">
-                                <!-- Avatar Option 1 -->
-                                <div class="avatar-option">
-                                    <input type="radio" id="avatar0" name="avatar" value="av0" class="avatar-radio" aria-label="Avatar 1" />
-                                    <label for="avatar0" class="avatar-label">
-                                        <img src="assets/avatars/av0.png" alt="Avatar option 1"
-                                            class="avatar-thumbnail" />
-                                        <div class="avatar-selected-indicator">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <!-- Avatar Option 2 -->
-                                <div class="avatar-option">
-                                    <input type="radio" id="avatar1" name="avatar" value="av1" class="avatar-radio" aria-label="Avatar 2" />
-                                    <label for="avatar1" class="avatar-label">
-                                        <img src="assets/avatars/av1.png" alt="Avatar option 2"
-                                            class="avatar-thumbnail" />
-                                        <div class="avatar-selected-indicator">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <!-- Avatar Option 3 -->
-                                <div class="avatar-option">
-                                    <input type="radio" id="avatar2" name="avatar" value="av2" class="avatar-radio" aria-label="Avatar 3" />
-                                    <label for="avatar2" class="avatar-label">
-                                        <img src="assets/avatars/av2.png" alt="Avatar option 3"
-                                            class="avatar-thumbnail" />
-                                        <div class="avatar-selected-indicator">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <!-- Avatar Option 4 -->
-                                <div class="avatar-option">
-                                    <input type="radio" id="avatar3" name="avatar" value="av3" class="avatar-radio" aria-label="Avatar 4" />
-                                    <label for="avatar3" class="avatar-label">
-                                        <img src="assets/avatars/av3.png" alt="Avatar option 4"
-                                            class="avatar-thumbnail" />
-                                        <div class="avatar-selected-indicator">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <!-- Avatar Option 5 -->
-                                <div class="avatar-option">
-                                    <input type="radio" id="avatar4" name="avatar" value="av4" class="avatar-radio" aria-label="Avatar 5" />
-                                    <label for="avatar4" class="avatar-label">
-                                        <img src="assets/avatars/av4.png" alt="Avatar option 5"
-                                            class="avatar-thumbnail" />
-                                        <div class="avatar-selected-indicator">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <!-- Avatar Option 6 -->
-                                <div class="avatar-option">
-                                    <input type="radio" id="avatar5" name="avatar" value="av5" class="avatar-radio" aria-label="Avatar 6" />
-                                    <label for="avatar5" class="avatar-label">
-                                        <img src="assets/avatars/av5.png" alt="Avatar option 6"
-                                            class="avatar-thumbnail" />
-                                        <div class="avatar-selected-indicator">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <!-- Avatar Option 7 -->
-                                <div class="avatar-option">
-                                    <input type="radio" id="avatar6" name="avatar" value="av6" class="avatar-radio" aria-label="Avatar 7" />
-                                    <label for="avatar6" class="avatar-label">
-                                        <img src="assets/avatars/av6.png" alt="Avatar option 7"
-                                            class="avatar-thumbnail" />
-                                        <div class="avatar-selected-indicator">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <!-- Avatar Option 8 -->
-                                <div class="avatar-option">
-                                    <input type="radio" id="avatar7" name="avatar" value="av7" class="avatar-radio" aria-label="Avatar 8" />
-                                    <label for="avatar7" class="avatar-label">
-                                        <img src="assets/avatars/av7.png" alt="Avatar option 8"
-                                            class="avatar-thumbnail" />
-                                        <div class="avatar-selected-indicator">
-                                            <i class="fas fa-check-circle"></i>
-                                        </div>
-                                    </label>
-                                </div>
+                            <div class="avatar-grid" id="avatarGrid" role="radiogroup" aria-label="Select your avatar" data-i18n-attr="aria-label" data-i18n="register.avatar.select">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Nickname Input (Hidden when avatar grid is expanded) -->
                     <div class="input-section" id="nicknameSection">
                         <div class="form-group">
-                            <label for="nickname" class="form-label">
+                            <label for="nickname" class="form-label" data-i18n="register.nickname.label">
                                 Nickname
-                                <button type="button" class="info-tooltip"
-                                    data-tooltip="Your unique username for KeyBeats. 3-20 characters, alphanumeric and underscores only."
-                                    aria-label="Nickname information">
+                                <button type="button"
+                                        class="info-tooltip"
+                                        data-tooltip="Your unique username for KeyBeats. 3-20 characters, alphanumeric and underscores only."
+                                        data-i18n-attr="data-tooltip"
+                                        data-i18n="register.nickname.tooltip"
+                                        aria-label="Nickname information">
                                     <i class="fas fa-question-circle"></i>
                                 </button>
                             </label>
+
                             <div class="input-wrapper">
-                                <input type="text" id="nickname" name="nickname" class="form-input" placeholder="Enter your nickname" autocomplete="off" aria-required="true" aria-describedby="nickname-error nickname-help" maxlength="20" />
+                                <input type="text" id="nickname" name="nickname" class="form-input" placeholder="Enter your nickname" data-i18n-attr="placeholder" data-i18n="register.nickname.placeholder" autocomplete="off" aria-required="true" />
                                 <span class="validation-icon"></span>
                             </div>
-                            <span id="nickname-help" class="input-help">3-20 characters allowed</span>
+
+                            <span id="nickname-help" class="input-help" data-i18n="register.nickname.help">
+                                3-20 characters allowed
+                            </span>
                             <span id="nickname-error" class="error-message" role="alert"></span>
                             <span class="availability-message"></span>
                         </div>
                     </div>
                 </div>
 
-                <!-- STEP 2: Email -->
+                <!-- STEP 2 -->
                 <div class="form-step" id="step2" data-step="2">
                     <div class="input-section">
                         <div class="form-group">
-                            <label for="email" class="form-label">
-                                Email
-                                <button type="button" class="info-tooltip"
-                                    data-tooltip="We'll use this email to verify your account and send important notifications."
-                                    aria-label="Email information">
-                                    <i class="fas fa-question-circle"></i>
-                                </button>
-                            </label>
+                            <label for="email" class="form-label" data-i18n="register.email.label">Email</label>
+
                             <div class="input-wrapper">
-                                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" autocomplete="email" aria-required="true" aria-describedby="email-error email-help" />
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" data-i18n-attr="placeholder" data-i18n="register.email.placeholder" autocomplete="email" aria-required="true" />
                                 <span class="validation-icon"></span>
                             </div>
-                            <span id="email-help" class="input-help">Make sure you have access to this email</span>
+
+                            <span id="email-help" class="input-help" data-i18n="register.email.help">We'll never share your email</span>
                             <span id="email-error" class="error-message" role="alert"></span>
                             <span class="availability-message"></span>
                         </div>
                     </div>
                 </div>
 
-                <!-- STEP 3: Password -->
+                <!-- STEP 3 -->
                 <div class="form-step" id="step3" data-step="3">
                     <div class="input-section">
                         <div class="form-group">
-                            <label for="password" class="form-label">
-                                Password
-                                <button type="button" class="info-tooltip"
-                                    data-tooltip="Minimum 8 characters with at least one uppercase letter, one lowercase letter, and one number."
-                                    aria-label="Password requirements">
-                                    <i class="fas fa-question-circle"></i>
-                                </button>
-                            </label>
+                            <label for="password" class="form-label" data-i18n="register.password.label">Password</label>
+
                             <div class="input-wrapper">
-                                <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" autocomplete="new-password" aria-required="true" aria-describedby="password-error password-help" />
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="password" name="password" class="form-input" placeholder="Create a strong password" data-i18n-attr="placeholder" data-i18n="register.password.placeholder" autocomplete="new-password" aria-required="true" />
                                 <button type="button" class="toggle-password" data-target="password" aria-label="Show password">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <span class="validation-icon"></span>
                             </div>
-                            <span id="password-help" class="input-help">At least 8 characters, 1 uppercase, 1 lowercase,
-                                1
-                                number</span>
-                            <span id="password-error" class="error-message" role="alert"></span>
 
-                            <!-- Password Strength Indicator -->
                             <div class="password-strength">
                                 <div class="strength-bar">
                                     <div class="strength-fill" data-strength="0"></div>
                                 </div>
-                                <span class="strength-text">Weak</span>
+                                <span class="strength-text" data-i18n="register.password.weak">Weak</span>
                             </div>
+
+                            <span id="password-help" class="input-help" data-i18n="register.password.help">At least 8 characters, 1 uppercase, 1 lowercase, 1 number</span>
+                            <span id="password-error" class="error-message" role="alert"></span>
                         </div>
                     </div>
                 </div>
 
-                <!-- STEP 4: Confirm Password -->
+                <!-- STEP 4 -->
                 <div class="form-step" id="step4" data-step="4">
                     <div class="input-section">
                         <div class="form-group">
-                            <label for="confirmPassword" class="form-label">
-                                Confirm Password
-                                <button type="button" class="info-tooltip"
-                                    data-tooltip="Re-enter your password to confirm it matches."
-                                    aria-label="Confirm password information">
-                                    <i class="fas fa-question-circle"></i>
-                                </button>
-                            </label>
+                            <label for="confirmPassword" class="form-label" data-i18n="register.confirm.label">Confirm Password</label>
+
                             <div class="input-wrapper">
-                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirm your password" autocomplete="new-password" aria-required="true" aria-describedby="confirmPassword-error" />
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Re-enter your password" data-i18n-attr="placeholder" data-i18n="register.confirm.placeholder" autocomplete="new-password" aria-required="true" />
                                 <button type="button" class="toggle-password" data-target="confirmPassword" aria-label="Show password">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <span class="validation-icon"></span>
                             </div>
+
+                            <span id="confirmPassword-help" class="input-help" data-i18n="register.confirm.help">Passwords must match</span>
                             <span id="confirmPassword-error" class="error-message" role="alert"></span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Navigation Buttons -->
                 <div class="form-navigation">
-                    <!-- Back Button (Hidden on step 1) -->
-                    <button type="button" id="backBtn" class="btn btn-back" aria-label="Go to previous step" style="display: none">
+                    <button type="button" id="backBtn" class="btn btn-back" data-i18n="common.back">
                         <i class="fas fa-chevron-left"></i>
                         Back
                     </button>
 
-                    <!-- Next Button (Hidden on step 4) -->
-                    <button type="button" id="nextBtn" class="btn btn-next" aria-label="Go to next step">
+                    <button type="button" id="nextBtn" class="btn btn-next" data-i18n="common.next">
                         Next
                         <i class="fas fa-chevron-right"></i>
                     </button>
 
-                    <!-- Submit Button (Only visible on step 4) -->
-                    <button type="submit" id="submitBtn" class="btn btn-submit" aria-label="Create your account" style="display: none">
-                        <i class="fas fa-check"></i>
+                    <button type="submit" id="submitBtn" class="btn btn-submit" data-i18n="register.submit">
+                        <i class="fas fa-user-plus"></i>
                         Create Account
                     </button>
                 </div>
             </form>
 
-            <!-- Loading Overlay -->
             <div class="loading-overlay" id="loadingOverlay" style="display: none">
                 <div class="spinner"></div>
-                <p class="loading-text">Creating your account...</p>
+                <p class="loading-text" data-i18n="register.loading">
+                    Creating your account...
+                </p>
             </div>
         </div>
 
-        <!-- Already have account link -->
         <div class="footer-link-container">
             <p class="footer-text">
-                Already have an account?
-                <a href="login.html" class="link-primary">Sign in here</a>
+                <span data-i18n="register.haveAccount">Already have an account?</span>
+                <a href="login.html" class="link-primary" data-i18n="register.signIn">
+                    Sign in here
+                </a>
             </p>
         </div>
     </div>
 
-    <!-- Accessibility: Skip to main content -->
-    <a href="#registrationForm" class="skip-link">Skip to registration form</a>
+    <a href="#registrationForm" class="skip-link" data-i18n="accessibility.skip">
+        Skip to registration form
+    </a>
 
-    <!-- Tooltip container for dynamic tooltips -->
     <div id="tooltipContainer" class="tooltip-container" role="tooltip" style="display: none"></div>
+
 </body>
 
 </html>

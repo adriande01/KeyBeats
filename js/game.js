@@ -18,373 +18,351 @@
 
 // TEST COMENTARO DE ADRI
 
-(function () {
-  // ---------- Utility: get cookie ----------
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return null;
-  }
-
-  // ---------- Utility: parse session cookie to extract userId ----------
-  function getSessionUserId() {
-    const raw = getCookie('keybeats_session');
-    if (!raw) return null;
-    try {
-      // cookie might be a JSON stringified object or plain userId string
-      const decoded = decodeURIComponent(raw);
-      const parsed = JSON.parse(decoded);
-      // If JSON with userId field, return it
-      if (parsed && parsed.userId) return parsed.userId;
-      // If JSON-like is actually an object with id
-      if (parsed && parsed.id) return parsed.id;
-      // Otherwise if parsed is string fallback
-      if (typeof parsed === 'string') return parsed;
-    } catch (e) {
-      // Not JSON, return raw value
-      return raw;
-    }
-    return null;
-  }
-
-  // ---------- Utility: read querystring ----------
-  function qs(name) {
-    const params = new URLSearchParams(window.location.search);
-    return params.get(name);
-  }
-
-  // ---------- Key normalization / combo matching ----------
-  // Expected format for beat.keys: "A", "S", "Ctrl+D", "Shift+X", "Ctrl+Shift+F"
-  function comboMatchesEvent(expectedCombo, event) {
-    if (!expectedCombo) return false;
-    const parts = expectedCombo.split('+').map(p => p.trim().toUpperCase());
-    // check modifiers
-    const needCtrl = parts.includes('CTRL') || parts.includes('CONTROL');
-    const needShift = parts.includes('SHIFT');
-    const needAlt = parts.includes('ALT');
-
-    // The last non-modifier token is the main key (e.g. 'D' in 'CTRL+D')
-    const mainParts = parts.filter(p => !['CTRL', 'CONTROL', 'SHIFT', 'ALT'].includes(p));
-    const mainKey = mainParts.length ? mainParts[mainParts.length - 1] : null;
-
-    if (needCtrl && !event.ctrlKey) return false;
-    if (needShift && !event.shiftKey) return false;
-    if (needAlt && !event.altKey) return false;
-
-    if (!mainKey) {
-      // only modifiers expected (rare) - accept if modifiers match
-      return true;
+(function() {
+    // ---------- Utility: get cookie ----------
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
     }
 
-    const pressed = event.key ? String(event.key).toUpperCase() : '';
-    // Normalize special names: ArrowLeft -> LEFT, etc.
-    const normalizedPressed = pressed.replace('ARROW', '').toUpperCase();
-
-    // If mainKey is a single character, match against event.key
-    if (mainKey.length === 1) {
-      return normalizedPressed === mainKey;
+    // ---------- Utility: parse session cookie to extract userId ----------
+    function getSessionUserId() {
+        const raw = getCookie('keybeats_session');
+        if (!raw) return null;
+        try {
+            // cookie might be a JSON stringified object or plain userId string
+            const decoded = decodeURIComponent(raw);
+            const parsed = JSON.parse(decoded);
+            // If JSON with userId field, return it
+            if (parsed && parsed.userId) return parsed.userId;
+            // If JSON-like is actually an object with id
+            if (parsed && parsed.id) return parsed.id;
+            // Otherwise if parsed is string fallback
+            if (typeof parsed === 'string') return parsed;
+        } catch (e) {
+            // Not JSON, return raw value
+            return raw;
+        }
+        return null;
     }
 
-    // For named keys like ENTER, SPACE, ESC
-    return normalizedPressed === mainKey;
-  }
-
-  // ---------- Global runtime state ----------
-  let currentSong = null;
-  let beats = [];
-  let beatIndex = 0;
-  let beatActive = false;
-  let runStars = 0;
-  let maxStars = 0;
-  let userId = null;
-  let audio = null;
-  let gameEnded = false;
-
-  // UI references
-  const $timer = $('#timerDisplay');
-  const $beatBox = $('#beatBox');
-  const $beatKeys = $('#beatKeys');
-  const $starsEarned = $('#starsEarned');
-  const $modal = $('#gameOverModal');
-  const $modalStars = $('#modalStars');
-  const $modalName = $('#modalSongName');
-  const $modalAuthor = $('#modalSongAuthor');
-  const $modalStarsEarned = $('#modalStarsEarned');
-  const $modalMaxStars = $('#modalMaxStars');
-
-  // ---------- Set background video based on song ----------
-  function setBackgroundVideo(videoPath) {
-    const $bgVideo = $('#backgroundVideo');
-    if ($bgVideo.length && videoPath) {
-      // Set new video source
-      $bgVideo.attr('src', videoPath);
-      // Reload and play video
-      $bgVideo[0].load();
-      $bgVideo[0].play();
-    }
-  }
-
-  // ---------- Load song and user then start ----------
-  $(document).ready(() => {
-    userId = getSessionUserId();
-    if (!userId) {
-      // no session -> redirect to login
-      window.location.href = 'login.html';
-      return;
+    // ---------- Utility: read querystring ----------
+    function qs(name) {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(name);
     }
 
-    const songId = qs('songId');
-    if (!songId) {
-      // no song selected -> go back
-      window.location.href = 'index.html';
-      return;
+    // ---------- Key normalization / combo matching ----------
+    // Expected format for beat.keys: "A", "S", "Ctrl+D", "Shift+X", "Ctrl+Shift+F"
+    function comboMatchesEvent(expectedCombo, event) {
+        if (!expectedCombo) return false;
+        const parts = expectedCombo.split('+').map(p => p.trim().toUpperCase());
+        // check modifiers
+        const needCtrl = parts.includes('CTRL') || parts.includes('CONTROL');
+        const needShift = parts.includes('SHIFT');
+        const needAlt = parts.includes('ALT');
+
+        // The last non-modifier token is the main key (e.g. 'D' in 'CTRL+D')
+        const mainParts = parts.filter(p => !['CTRL', 'CONTROL', 'SHIFT', 'ALT'].includes(p));
+        const mainKey = mainParts.length ? mainParts[mainParts.length - 1] : null;
+
+        if (needCtrl && !event.ctrlKey) return false;
+        if (needShift && !event.shiftKey) return false;
+        if (needAlt && !event.altKey) return false;
+
+        if (!mainKey) {
+            // only modifiers expected (rare) - accept if modifiers match
+            return true;
+        }
+
+        const pressed = event.key ? String(event.key).toUpperCase() : '';
+        // Normalize special names: ArrowLeft -> LEFT, etc.
+        const normalizedPressed = pressed.replace('ARROW', '').toUpperCase();
+
+        // If mainKey is a single character, match against event.key
+        if (mainKey.length === 1) {
+            return normalizedPressed === mainKey;
+        }
+
+        // For named keys like ENTER, SPACE, ESC
+        return normalizedPressed === mainKey;
     }
 
-    // load songs then initialize
-    $.ajax({
-      url: 'api/get-songs.php',
-      method: 'GET',
-      dataType: 'json'
-    }).done(function (res) {
-      if (!res || !res.success || !Array.isArray(res.songs)) {
-        alert('Failed to load songs');
-        return;
-      }
+    // ---------- Global runtime state ----------
+    let currentSong = null;
+    let beats = [];
+    let beatIndex = 0;
+    let beatActive = false;
+    let runStars = 0;
+    let maxStars = 0;
+    let userId = null;
+    let audio = null;
+    let gameEnded = false;
 
-      const songs = res.songs;
-      const s = songs.find(x => x.id === songId);
-      if (!s) {
-        alert('Song not found');
-        window.location.href = 'index.html';
-        return;
-      }
+    // UI references
+    const $timer = $('#timerDisplay');
+    const $beatBox = $('#beatBox');
+    const $beatKeys = $('#beatKeys');
+    const $starsEarned = $('#starsEarned');
+    const $modal = $('#gameOverModal');
+    const $modalStars = $('#modalStars');
+    const $modalName = $('#modalSongName');
+    const $modalAuthor = $('#modalSongAuthor');
+    const $modalStarsEarned = $('#modalStarsEarned');
+    const $modalMaxStars = $('#modalMaxStars');
 
-      currentSong = s;
-      beats = Array.isArray(s.beats) ? s.beats.slice().sort((a,b) => (a.order||0)-(b.order||0)) : [];
-      maxStars = s.maxStars || 0;
+    // ---------- Set background video based on song ----------
+    function setBackgroundVideo(videoPath) {
+        const $bgVideo = $('#backgroundVideo');
+        if ($bgVideo.length && videoPath) {
+            // Set new video source
+            $bgVideo.attr('src', videoPath);
+            // Reload and play video
+            $bgVideo[0].load();
+            $bgVideo[0].play();
+        }
+    }
 
-      // UI initial
-      $('#songName').text(currentSong.name || '');
-      $modalName.text(currentSong.name || '');
-      $modalAuthor.text(currentSong.author || '');
-      $modalMaxStars.text(maxStars);
+    // ---------- Load song and user then start ----------
+    $(document).ready(() => {
+        userId = getSessionUserId();
+        if (!userId) {
+            // no session -> redirect to login
+            window.location.href = 'login.html';
+            return;
+        }
 
-      // Set background video (coverImage contains video path)
-      if (currentSong.coverImage) {
-        setBackgroundVideo(currentSong.coverImage);
-      }
+        const songId = qs('songId');
+        if (!songId) {
+            // no song selected -> go back
+            window.location.href = 'index.html';
+            return;
+        }
 
-      // set audio
-      audio = document.getElementById('audioPlayer');
-      if (!audio) {
-        console.error('audio element not found');
-        return;
-      }
-      audio.src = currentSong.audioFile || '';
-      audio.load();
+        // load songs then initialize
+        $.ajax({
+            url: 'api/get-songs.php',
+            method: 'GET',
+            dataType: 'json'
+        }).done(function(res) {
+            if (!res || !res.success || !Array.isArray(res.songs)) {
+                alert(i18next.t('errors.loadSongs'));
+                return;
+            }
 
-      // load user's previous progress for display (optional)
-      loadUserProgress(userId, function () {
-        // start playing after we know user
-        startRun();
-      });
+            const songs = res.songs;
+            const s = songs.find(x => x.id === songId);
+            if (!s) {
+                alert(i18next.t('errors.songNotFound'));
+                window.location.href = 'index.html';
+                return;
+            }
 
-    }).fail(function () {
-      alert('Error loading songs from server');
-    });
-  });
+            currentSong = s;
+            beats = Array.isArray(s.beats) ? s.beats.slice().sort((a, b) => (a.order || 0) - (b.order || 0)) : [];
+            maxStars = s.maxStars || 0;
 
-  // ---------- loadUserProgress (read-only display of record prior to play) ----------
-  function loadUserProgress(userId, cb) {
-    $.ajax({
-      url: 'api/get-user-progress.php',
-      method: 'POST',
-      dataType: 'json',
-      data: { userId: userId }
-    }).done(function (res) {
-      if (res && res.success && res.user) {
-        // we can show record / attempts if needed
-        const progressArr = res.user.progress || [];
-        const prog = progressArr.find(p => p.songId === currentSong.id);
-        const recordStars = prog ? (prog.starsEarned || 0) : 0;
-        // show record in header (if you have a spot) - optional
-        // but here we simply render 0-run stars initially:
-        renderRunStars(0);
-      }
-      if (cb) cb();
-    }).fail(function () {
-      if (cb) cb();
-    });
-  }
+            // UI initial
+            $('#songName').text(currentSong.name || '');
+            $modalName.text(currentSong.name || '');
+            $modalAuthor.text(currentSong.author || '');
+            $modalMaxStars.text(maxStars);
 
-  // ---------- Start run ----------
-  function startRun() {
-    runStars = 0;
-    beatIndex = 0;
-    beatActive = false;
-    gameEnded = false;
+            // Set background video (coverImage contains video path)
+            if (currentSong.coverImage) {
+                setBackgroundVideo(currentSong.coverImage);
+            }
 
-    // Prepare audio event listeners
-    audio.ontimeupdate = onTimeUpdate;
-    audio.onended = onSongEnd;
+            // set audio
+            audio = document.getElementById('audioPlayer');
+            if (!audio) {
+                console.error('audio element not found');
+                return;
+            }
+            audio.src = currentSong.audioFile || '';
+            audio.load();
 
-    // keyboard handler
-    $(document).off('keydown.game').on('keydown.game', function (e) {
-      if (!beatActive || gameEnded) return;
-      handleKeyForCurrentBeat(e);
+            // load user's previous progress for display (optional)
+            loadUserProgress(userId, function() {
+                // start playing after we know user
+                startRun();
+            });
+
+        }).fail(function() {
+            alert(i18next.t('errors.loadSongs'));
+        });
     });
 
-    $(document).one('keydown', () => {
-        audio.play();
-    });
-
-    renderRunStars(runStars);
-  }
-
-  // ---------- audio time update ----------
-  function onTimeUpdate() {
-    const t = audio.currentTime;
-    updateTimerDisplay(t);
-
-    // check next beat if any
-    if (beatIndex >= beats.length) return;
-
-    const nextBeat = beats[beatIndex];
-    // Show beat when we reach its timestamp (or small allowance earlier)
-    if (!beatActive && t >= (nextBeat.timestamp - 0.05)) {
-      showBeat(nextBeat);
+    // ---------- loadUserProgress (read-only display of record prior to play) ----------
+    function loadUserProgress(userId, cb) {
+        $.ajax({
+            url: 'api/get-user-progress.php',
+            method: 'POST',
+            dataType: 'json',
+            data: { userId: userId }
+        }).done(function(res) {
+            if (res && res.success && res.user) {
+                const progressArr = res.user.progress || [];
+                const prog = progressArr.find(p => p.songId === currentSong.id);
+                const recordStars = prog ? (prog.starsEarned || 0) : 0;
+                renderRunStars(0);
+            }
+            if (cb) cb();
+        }).fail(function() {
+            if (cb) cb();
+        });
     }
-  }
 
-  function updateTimerDisplay(current) {
-    const mm = String(Math.floor(current / 60)).padStart(2, '0');
-    const ss = String(Math.floor(current % 60)).padStart(2, '0');
-    $timer.text(`${mm}:${ss}`);
-  }
+    // ---------- Start run ----------
+    function startRun() {
+        runStars = 0;
+        beatIndex = 0;
+        beatActive = false;
+        gameEnded = false;
 
-  // ---------- show beat ----------
-  function showBeat(beat) {
-    beatActive = true;
-    $beatKeys.text(beat.keys || '');
-    $beatBox.stop(true, true).fadeIn(80);
+        // Prepare audio event listeners
+        audio.ontimeupdate = onTimeUpdate;
+        audio.onended = onSongEnd;
 
-    // small window to respond (0.7s). If not pressed, it's a miss.
-    const windowMs = 700;
-    setTimeout(() => {
-      if (beatActive) {
-        // user didn't press in time -> fail
-        applyFail();
+        // keyboard handler
+        $(document).off('keydown.game').on('keydown.game', function(e) {
+            if (!beatActive || gameEnded) return;
+            handleKeyForCurrentBeat(e);
+        });
+
+        $(document).one('keydown', () => {
+            audio.play();
+        });
+
+        renderRunStars(runStars);
+    }
+
+    // ---------- audio time update ----------
+    function onTimeUpdate() {
+        const t = audio.currentTime;
+        updateTimerDisplay(t);
+
+        if (beatIndex >= beats.length) return;
+
+        const nextBeat = beats[beatIndex];
+        if (!beatActive && t >= (nextBeat.timestamp - 0.05)) {
+            showBeat(nextBeat);
+        }
+    }
+
+    function updateTimerDisplay(current) {
+        const mm = String(Math.floor(current / 60)).padStart(2, '0');
+        const ss = String(Math.floor(current % 60)).padStart(2, '0');
+        $timer.text(`${mm}:${ss}`);
+    }
+
+    // ---------- show beat ----------
+    function showBeat(beat) {
+        beatActive = true;
+        $beatKeys.text(beat.keys || '');
+        $beatBox.stop(true, true).fadeIn(80);
+
+        const windowMs = 700;
+        setTimeout(() => {
+            if (beatActive) {
+                applyFail();
+                advanceBeatState();
+            }
+        }, windowMs);
+    }
+
+    // ---------- handle keyboard input for current beat ----------
+    function handleKeyForCurrentBeat(e) {
+        if (beatIndex >= beats.length) return;
+
+        const beat = beats[beatIndex];
+        const ok = comboMatchesEvent(beat.keys, e);
+        if (ok) {
+            applySuccess();
+        } else {
+            applyFail();
+        }
         advanceBeatState();
-      }
-    }, windowMs);
-  }
-
-  // ---------- handle keyboard input for current beat ----------
-  function handleKeyForCurrentBeat(e) {
-    if (beatIndex >= beats.length) return;
-
-    const beat = beats[beatIndex];
-    const ok = comboMatchesEvent(beat.keys, e);
-    if (ok) {
-      applySuccess();
-    } else {
-      applyFail();
     }
-    advanceBeatState();
-  }
 
-  // ---------- apply success/fail ----------
-  function applySuccess() {
-    runStars = Math.min(runStars + 1, maxStars);
-    renderRunStars(runStars);
-    
-    // CAMBIO 2: Borde VERDE cuando acierta
-    $beatBox.removeClass('beat-error').addClass('beat-success');
-    setTimeout(() => $beatBox.removeClass('beat-success'), 300);
-  }
-
-  function applyFail() {
-    runStars = Math.max(0, runStars - 1);
-    renderRunStars(runStars);
-    
-    // CAMBIO 2: Borde ROJO cuando falla
-    $beatBox.removeClass('beat-success').addClass('beat-error');
-    setTimeout(() => $beatBox.removeClass('beat-error'), 300);
-  }
-
-  // ---------- advance beat state ----------
-  function advanceBeatState() {
-    beatActive = false;
-    $beatBox.stop(true, true).fadeOut(80);
-    beatIndex++;
-  }
-
-  // ---------- render run stars (in top-left area) ----------
-  function renderRunStars(stars) {
-    $starsEarned.empty();
-    for (let i = 0; i < maxStars; i++) {
-      if (i < stars) {
-        $starsEarned.append('<i class="fas fa-star star-filled"></i>');
-      } else {
-        $starsEarned.append('<i class="far fa-star star-empty"></i>');
-      }
+    // ---------- apply success/fail ----------
+    function applySuccess() {
+        runStars = Math.min(runStars + 1, maxStars);
+        renderRunStars(runStars);
+        $beatBox.removeClass('beat-error').addClass('beat-success');
+        setTimeout(() => $beatBox.removeClass('beat-success'), 300);
     }
-  }
 
-  // ---------- song ended ----------
-  function onSongEnd() {
-    if (gameEnded) return;
-    gameEnded = true;
+    function applyFail() {
+        runStars = Math.max(0, runStars - 1);
+        renderRunStars(runStars);
+        $beatBox.removeClass('beat-success').addClass('beat-error');
+        setTimeout(() => $beatBox.removeClass('beat-error'), 300);
+    }
 
-    // At song end: we must call save-progress API
-    // According to your business rule: prior record must not decrease – save-progress.php already enforces this.
-    const postData = {
-      userId: userId,
-      songId: currentSong.id,
-      starsEarned: runStars
-    };
+    // ---------- advance beat state ----------
+    function advanceBeatState() {
+        beatActive = false;
+        $beatBox.stop(true, true).fadeOut(80);
+        beatIndex++;
+    }
 
-    // show loading or disable UI
-    $.ajax({
-      url: 'api/save-progress.php',
-      method: 'POST',
-      dataType: 'json',
-      data: postData
-    }).done(function (res) {
-      // res: { success: true, level: ..., completedSongs: ... } on success
-      // CAMBIO 3: Modal más bonito con iconos de estrella
-      showGameOverModal(runStars);
-    }).fail(function () {
-      // even if save fails, show modal so user sees result (but notify)
-      showGameOverModal(runStars);
-      console.warn('save-progress request failed.');
+    // ---------- render run stars ----------
+    function renderRunStars(stars) {
+        $starsEarned.empty();
+        for (let i = 0; i < maxStars; i++) {
+            if (i < stars) {
+                $starsEarned.append('<i class="fas fa-star star-filled"></i>');
+            } else {
+                $starsEarned.append('<i class="far fa-star star-empty"></i>');
+            }
+        }
+    }
+
+    // ---------- song ended ----------
+    function onSongEnd() {
+        if (gameEnded) return;
+        gameEnded = true;
+
+        const postData = {
+            userId: userId,
+            songId: currentSong.id,
+            starsEarned: runStars
+        };
+
+        $.ajax({
+            url: 'api/save-progress.php',
+            method: 'POST',
+            dataType: 'json',
+            data: postData
+        }).done(function(res) {
+            showGameOverModal(runStars);
+        }).fail(function() {
+            showGameOverModal(runStars);
+            console.warn(i18next.t('errors.saveProgressFailed'));
+        });
+    }
+
+    // ---------- CAMBIO 3: Show game over modal with stars icons ----------
+    function showGameOverModal(finalStars) {
+        $modalStars.empty();
+        for (let i = 0; i < maxStars; i++) {
+            if (i < finalStars) {
+                $modalStars.append('<i class="fas fa-star star-filled"></i>');
+            } else {
+                $modalStars.append('<i class="far fa-star star-empty"></i>');
+            }
+        }
+        $('.modal-score-text').hide();
+        $modal.fadeIn(240);
+    }
+
+    // ---------- modal main menu button ----------
+    $('#btnMainMenu').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = 'index.html';
     });
-  }
-
-  // ---------- CAMBIO 3: Show game over modal with stars icons ----------
-  function showGameOverModal(finalStars) {
-    // Clear and render stars with icons
-    $modalStars.empty();
-    for (let i = 0; i < maxStars; i++) {
-      if (i < finalStars) {
-        $modalStars.append('<i class="fas fa-star star-filled"></i>');
-      } else {
-        $modalStars.append('<i class="far fa-star star-empty"></i>');
-      }
-    }
-    
-    // Hide text score (we only show stars icons now)
-    $('.modal-score-text').hide();
-    
-    // Show modal
-    $modal.fadeIn(240);
-  }
-
-  // ---------- modal main menu button ----------
-  $('#btnMainMenu').on('click', function (e) {
-    e.preventDefault();
-    window.location.href = 'index.html';
-  });
 
 })();

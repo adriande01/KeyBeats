@@ -1,0 +1,132 @@
+{
+    "app": {
+        "name": "KeyBeats"
+    },
+    "meta": {
+        "home": {
+            "title": "KeyBeats - Home",
+            "description": "KeyBeats - Select your song and start playing"
+        },
+        "login": {
+            "title": "KeyBeats - Login",
+            "description": "KeyBeats - Login to your account"
+        },
+        "register": {
+            "title": "KeyBeats - Register",
+            "description": "KeyBeats - Create your account and start your rhythm journey"
+        }
+    },
+    "common": {
+        "back": "Back",
+        "next": "Next",
+        "play": "PLAY",
+        "skipToContent": "Skip to login form",
+        "skipSongs": "Skip to song list",
+        "selectLanguage": "Language"
+    },
+    "login": {
+        "pageTitle": "KeyBeats - Login",
+        "subtitle": "Login to your account",
+        "emailLabel": "Email",
+        "emailPlaceholder": "Enter your email",
+        "emailTooltip": "Your email address registered on KeyBeats",
+        "emailHelp": "We'll check if this email is registered",
+        "emailAriaLabel": "Email information",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "passwordTooltip": "Your password is case-sensitive",
+        "passwordHelp": "Enter the password for this account",
+        "passwordAriaLabel": "Password information",
+        "submit": "Login",
+        "submitAriaLabel": "Login to your account",
+        "loading": "Logging in...",
+        "password": {
+            "show": "Show password",
+            "hide": "Hide password"
+        },
+        "success": "Login successful!",
+        "errors": {
+            "incorrectPassword": "Incorrect password",
+            "emailNotRegistered": "Email is not registered",
+            "generic": "An error occurred. Please try again.",
+            "connection": "Cannot connect to server"
+        },
+        "validation": {
+            "emailRequired": "Email is required",
+            "emailInvalid": "Please enter a valid email",
+            "passwordRequired": "Password is required"
+        },
+        "noAccount": "Don't have an account?",
+        "createAccount": "Create one here"
+    },
+    "register": {
+        "nickname": {
+            "label": "Nickname",
+            "placeholder": "Enter your nickname",
+            "help": "3-20 characters allowed",
+            "tooltip": "Your unique username for KeyBeats. 3-20 characters, alphanumeric and underscores only."
+        },
+        "email": {
+            "label": "Email",
+            "placeholder": "Enter your email",
+            "help": "We'll never share your email"
+        },
+        "password": {
+            "label": "Password",
+            "placeholder": "Create a strong password",
+            "help": "At least 8 characters, 1 uppercase, 1 lowercase, 1 number",
+            "weak": "Weak"
+        },
+        "confirm": {
+            "label": "Confirm Password",
+            "placeholder": "Re-enter your password",
+            "help": "Passwords must match"
+        },
+        "submit": "Create Account",
+        "loading": "Creating your account...",
+        "haveAccount": "Already have an account?",
+        "signIn": "Sign in here",
+        "avatar": {
+            "selected": "Selected avatar",
+            "toggle": "Toggle avatar selection",
+            "select": "Select your avatar"
+        }
+    },
+    "navigation": {
+        "home": "Home",
+        "previousStep": "Go to previous step",
+        "nextStep": "Go to next step"
+    },
+    "user": {
+        "avatar": "User avatar"
+    },
+    "home": {
+        "title": "HOME",
+        "selectSong": "Select a song to view details",
+        "loading": "Loading songs...",
+        "selectSongAlert": "Please select a song first."
+    },
+    "song": {
+        "name": "NAME",
+        "difficulty": "DIFFICULTY",
+        "attempts": "ATTEMPTS",
+        "play": "Play this song"
+    },
+    "accessibility": {
+        "skipSongs": "Skip to song list",
+        "skip": "Skip to registration form",
+        "skipToLoginForm": "Skip to login form"
+    },
+    "errors": {
+        "loadUser": "Failed to load user data",
+        "loadUserData": "Failed to load user data. Please login again.",
+        "loadUserDataError": "An error occurred. Please try again.",
+        "loadSongs": "Failed to load songs",
+        "loadSongsError": "Failed to load songs. Please refresh the page.",
+        "songNotFound": "Song not found",
+        "saveProgressFailed": "Failed to save progress",
+        "connection": "Connection error. Please try again.",
+        "selectSong": "Please select a song first",
+        "generic": "Something went wrong. Please try again"
+    }
+}

@@ -247,54 +247,6 @@ body {
 }
 
 
-/* Dropdown Menu */
-
-.user-dropdown {
-    position: relative;
-}
-
-.dropdown-toggle {
-    background: transparent;
-    border: none;
-    color: #333;
-    font-size: 14px;
-    cursor: pointer;
-    padding: 5px;
-    transition: transform 0.3s ease;
-}
-
-.dropdown-toggle:hover {
-    transform: rotate(180deg);
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    min-width: 150px;
-    z-index: 1000;
-}
-
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 20px;
-    text-decoration: none;
-    color: #333;
-    transition: background 0.3s ease;
-}
-
-.dropdown-item:hover {
-    background: #ffb6c1;
-    color: #fff;
-}
-
-
 /* ===================================
    6. CONTENT WRAPPER
    =================================== */
@@ -698,5 +650,61 @@ body {
     }
     .detail-value {
         font-size: 16px;
+    }
+}
+
+
+/* ===================================
+   LANGUAGE SELECT DROPDOWN
+   =================================== */
+
+.language-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.language-selector label {
+    font-weight: 600;
+    color: #666;
+}
+
+#language-select {
+    padding: 6px 10px;
+    border-radius: 12px;
+    border: 2px solid #ffb6c1;
+    background: #fff;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#language-select:hover,
+#language-select:focus {
+    border-color: deeppink;
+    outline: none;
+    box-shadow: 0 4px 12px rgba(255, 0, 149, 0.3);
+}
+
+#language-select option {
+    padding: 8px;
+    background: #fff;
+    color: #333;
+}
+
+
+/* For small screens: make the dropdown full width */
+
+@media (max-width: 768px) {
+    .language-selector {
+        justify-content: center;
+        width: 100%;
+    }
+    #language-select {
+        width: 80%;
     }
 }

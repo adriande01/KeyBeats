@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KeyBeats - Login to your account">
-    <title>KeyBeats - Login</title>
+    <meta name="description" content="KeyBeats - Login to your account" data-i18n-attr="content" data-i18n="meta.login.description">
+    <title data-i18n="meta.login.title">KeyBeats - Login</title>
 
     <!-- CSS Stylesheets -->
     <link rel="stylesheet" href="css/login.css">
@@ -22,33 +22,39 @@
     <!-- User Model -->
     <script src="js/models/User.js"></script>
 
+
+    <script src="https://unpkg.com/i18next@23.2.1/i18next.min.js"></script>
+
+    <script src="https://unpkg.com/i18next-http-backend@2.5.0/i18nextHttpBackend.min.js"></script>
+
+    <script src="https://unpkg.com/i18next-browser-languagedetector@7.2.0/i18nextBrowserLanguageDetector.min.js"></script>
+
+    <script src="js/i18n.js"></script>
+
     <!-- Custom JavaScript -->
     <script src="js/login.js" defer></script>
+
+
 </head>
 
 <body>
 
     <!-- Background Layer -->
     <div class="background-layer">
-        <!-- Solid color background -->
         <div class="background-solid"></div>
-
-        <!-- Animated background (video/gif/image) -->
-        <div class="background-animated">
-            <!-- Background will be styled via CSS -->
-        </div>
+        <div class="background-animated"></div>
     </div>
 
     <!-- Main Login Container -->
     <div class="login-container">
 
-        <!-- Login Card (fixed size) -->
+        <!-- Login Card -->
         <div class="login-card">
 
-            <!-- Card Header with Logo/Title -->
+            <!-- Card Header -->
             <div class="card-header">
-                <h1 class="card-title">KeyBeats</h1>
-                <p class="card-subtitle">Login to your account</p>
+                <h1 class="card-title" data-i18n="app.name">KeyBeats</h1>
+                <p class="card-subtitle" data-i18n="login.subtitle">Login to your account</p>
             </div>
 
             <!-- Login Form -->
@@ -56,110 +62,120 @@
 
                 <!-- STEP 1: Email -->
                 <div class="form-step active" id="step1" data-step="1">
-
                     <div class="input-section">
                         <div class="form-group">
-                            <label for="email" class="form-label">
+                            <label for="email" class="form-label" data-i18n="login.emailLabel">
                                 Email
-                                <button 
-                                    type="button" 
-                                    class="info-tooltip" 
-                                    data-tooltip="Enter the email address you used to register"
+                                <button
+                                    type="button"
+                                    class="info-tooltip"
+                                    data-tooltip="Enter your registered email address"
+                                    data-i18n="login.emailTooltip"
+                                    data-i18n-attr="data-tooltip"
                                     aria-label="Email information"
-                                >
+                                    data-i18n-attr2="aria-label"
+                                    data-i18n2="login.emailAriaLabel">
                                     <i class="fas fa-question-circle"></i>
                                 </button>
                             </label>
+
                             <div class="input-wrapper">
                                 <i class="fas fa-envelope input-icon"></i>
-                                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" autocomplete="email" aria-required="true" aria-describedby="email-error email-help">
+                                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" data-i18n="login.emailPlaceholder" data-i18n-attr="placeholder" autocomplete="email" aria-required="true" aria-describedby="email-error email-help">
                                 <span class="validation-icon"></span>
                             </div>
-                            <span id="email-help" class="input-help">We'll check if this email is registered</span>
+
+                            <span id="email-help" class="input-help" data-i18n="login.emailHelp">
+                                We'll check if this email is registered
+                            </span>
                             <span id="email-error" class="error-message" role="alert"></span>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- STEP 2: Password -->
                 <div class="form-step" id="step2" data-step="2">
-
                     <div class="input-section">
                         <div class="form-group">
-                            <label for="password" class="form-label">
+                            <label for="password" class="form-label" data-i18n="login.passwordLabel">
                                 Password
-                                <button 
-                                    type="button" 
-                                    class="info-tooltip" 
+                                <button
+                                    type="button"
+                                    class="info-tooltip"
                                     data-tooltip="Enter your account password"
+                                    data-i18n="login.passwordTooltip"
+                                    data-i18n-attr="data-tooltip"
                                     aria-label="Password information"
-                                >
+                                    data-i18n-attr2="aria-label"
+                                    data-i18n2="login.passwordAriaLabel">
                                     <i class="fas fa-question-circle"></i>
                                 </button>
                             </label>
+
                             <div class="input-wrapper">
                                 <i class="fas fa-lock input-icon"></i>
-                                <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" autocomplete="current-password" aria-required="true" aria-describedby="password-error password-help">
-                                <button type="button" class="toggle-password" data-target="password" aria-label="Show password">
+                                <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" data-i18n="login.passwordPlaceholder" data-i18n-attr="placeholder" autocomplete="current-password" aria-required="true" aria-describedby="password-error password-help">
+
+                                <button type="button" class="toggle-password" data-target="password" aria-label="Show password" data-i18n-attr="aria-label">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <span class="validation-icon"></span>
                             </div>
-                            <span id="password-help" class="input-help">Enter the password for this account</span>
+
+                            <span id="password-help" class="input-help" data-i18n="login.passwordHelp">
+                                Enter the password for this account
+                            </span>
                             <span id="password-error" class="error-message" role="alert"></span>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Navigation Buttons -->
                 <div class="form-navigation">
 
-                    <!-- Back Button (Hidden on step 1) -->
-                    <button type="button" id="backBtn" class="btn btn-back" aria-label="Go to previous step" style="display: none;">
+                    <button type="button" id="backBtn" class="btn btn-back" aria-label="Go to previous step" data-i18n-attr="aria-label" data-i18n="navigation.previousStep" style="display: none;">
                         <i class="fas fa-chevron-left"></i>
-                        Back
+                        <span data-i18n="common.back">Back</span>
                     </button>
 
-                    <!-- Next Button (Hidden on step 2) -->
-                    <button type="button" id="nextBtn" class="btn btn-next" aria-label="Go to next step">
-                        Next
+                    <button type="button" id="nextBtn" class="btn btn-next" aria-label="Go to next step" data-i18n-attr="aria-label" data-i18n="navigation.nextStep">
+                        <span data-i18n="common.next">Next</span>
                         <i class="fas fa-chevron-right"></i>
                     </button>
 
-                    <!-- Submit Button (Only visible on step 2) -->
-                    <button type="submit" id="submitBtn" class="btn btn-submit" aria-label="Login to your account" style="display: none;">
+                    <button type="submit" id="submitBtn" class="btn btn-submit" aria-label="Login to your account" data-i18n-attr="aria-label" data-i18n="login.submitAriaLabel" style="display: none;">
                         <i class="fas fa-sign-in-alt"></i>
-                        Login
+                        <span data-i18n="login.submit">Login</span>
                     </button>
 
                 </div>
-
             </form>
 
             <!-- Loading Overlay -->
             <div class="loading-overlay" id="loadingOverlay" style="display: none;">
                 <div class="spinner"></div>
-                <p class="loading-text">Logging in...</p>
+                <p class="loading-text" data-i18n="login.loading">Logging in...</p>
             </div>
 
         </div>
 
-        <!-- Footer links -->
+        <!-- Footer -->
         <div class="footer-link-container">
             <p class="footer-text">
-                Don't have an account?
-                <a href="register.html" class="link-primary">Create one here</a>
+                <span data-i18n="login.noAccount">Don't have an account?</span>
+                <a href="register.html" class="link-primary" data-i18n="login.createAccount">
+                    Create one here
+                </a>
             </p>
         </div>
 
     </div>
 
-    <!-- Accessibility: Skip to main content -->
-    <a href="#loginForm" class="skip-link">Skip to login form</a>
+    <!-- Accessibility -->
+    <a href="#loginForm" class="skip-link" data-i18n="accessibility.skipToLoginForm">
+        Skip to login form
+    </a>
 
-    <!-- Tooltip container for dynamic tooltips -->
     <div id="tooltipContainer" class="tooltip-container" role="tooltip" style="display: none;"></div>
 
 </body>

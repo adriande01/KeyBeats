@@ -21,16 +21,16 @@ let userEmail = '';
 $(document).ready(function() {
     // Check if user already has session
     checkExistingSession();
-    
+
     // Initialize form validation
     initializeValidation();
-    
+
     // Initialize event listeners
     initializeEventListeners();
-    
+
     // Initialize tooltips
     initializeTooltips();
-    
+
     // Show first step
     showStep(1);
 });
@@ -42,7 +42,7 @@ $(document).ready(function() {
 function checkExistingSession() {
     // Check if session cookie exists
     const sessionToken = getCookie('keybeats_session');
-    
+
     if (sessionToken) {
         // User already logged in, redirect to main page
         window.location.href = 'index.html';
@@ -66,7 +66,7 @@ function setCookie(name, value, days) {
 function getCookie(name) {
     const nameEQ = name + "=";
     const ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
+    for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) === ' ') c = c.substring(1, c.length);
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
@@ -81,16 +81,16 @@ function getCookie(name) {
 function showStep(step) {
     // Hide all steps
     $('.form-step').removeClass('active');
-    
+
     // Show current step
     $(`#step${step}`).addClass('active');
-    
+
     // Update current step
     currentStep = step;
-    
+
     // Update navigation buttons
     updateNavigationButtons();
-    
+
     // Focus on first input of step
     setTimeout(() => {
         $(`#step${step} input:visible:first`).focus();
@@ -101,14 +101,14 @@ function updateNavigationButtons() {
     const $backBtn = $('#backBtn');
     const $nextBtn = $('#nextBtn');
     const $submitBtn = $('#submitBtn');
-    
+
     // Back button (hide on step 1)
     if (currentStep === 1) {
         $backBtn.hide();
     } else {
         $backBtn.show();
     }
-    
+
     // Next button (hide on step 2)
     if (currentStep === totalSteps) {
         $nextBtn.hide();
@@ -152,11 +152,11 @@ function initializeValidation() {
         },
         messages: {
             email: {
-                required: 'Please enter your email',
-                email: 'Please enter a valid email address'
+                required: i18next.t('login.validation.emailRequired'),
+                email: i18next.t('login.validation.emailInvalid')
             },
             password: {
-                required: 'Please enter your password'
+                required: i18next.t('login.validation.passwordRequired')
             }
         },
         errorPlacement: function(error, element) {
@@ -182,8 +182,8 @@ function initializeValidation() {
 
 function validateCurrentStep() {
     let isValid = true;
-    
-    switch(currentStep) {
+
+    switch (currentStep) {
         case 1:
             isValid = validateStep1();
             break;
@@ -191,7 +191,7 @@ function validateCurrentStep() {
             isValid = validateStep2();
             break;
     }
-    
+
     return isValid;
 }
 
@@ -199,15 +199,15 @@ function validateStep1() {
     const email = $('#email').val().trim();
     const $emailInput = $('#email');
     const $errorMsg = $('#email-error');
-    
+
     // Validate email format
     if (!$emailInput.valid()) {
         return false;
     }
-    
+
     // Check if email exists via AJAX
     let emailExists = false;
-    
+
     $.ajax({
         url: API_BASE + 'check-email.php',
         method: 'POST',
@@ -220,15 +220,15 @@ function validateStep1() {
             }
                 */
             emailExists = response.exists;
-            
+
         },
         error: function() {
-            showError('Connection error. Please try again.');
+            showError(i18next.t('errors.connection'));
         }
     });
-    
+
     if (!emailExists) {
-        $errorMsg.text('This email is not registered');
+        $errorMsg.text(i18next.t('login.errors.emailNotRegistered'));
         $emailInput.addClass('error').removeClass('valid');
         return false;
     } else {
@@ -241,12 +241,12 @@ function validateStep1() {
 function validateStep2() {
     const password = $('#password').val();
     const $passwordInput = $('#password');
-    
+
     // Validate password format
     if (!$passwordInput.valid()) {
         return false;
     }
-    
+
     return true;
 }
 
@@ -259,15 +259,15 @@ function setupPasswordToggle() {
         const targetId = $(this).data('target');
         const $input = $(`#${targetId}`);
         const $icon = $(this).find('i');
-        
+
         if ($input.attr('type') === 'password') {
             $input.attr('type', 'text');
             $icon.removeClass('fa-eye').addClass('fa-eye-slash');
-            $(this).attr('aria-label', 'Hide password');
+            $(this).attr('aria-label', i18next.t('login.password.hide'));
         } else {
             $input.attr('type', 'password');
             $icon.removeClass('fa-eye-slash').addClass('fa-eye');
-            $(this).attr('aria-label', 'Show password');
+            $(this).attr('aria-label', i18next.t('login.password.show'));
         }
     });
 }
@@ -277,7 +277,8 @@ function setupPasswordToggle() {
 // ===================================
 
 function initializeTooltips() {
-     $('.info-tooltip').on('mouseenter focus', function() {
+    $('.info-tooltip').on('mouseenter focus', function() {
+        // Get translated tooltip text from data-tooltip attribute
         const tooltipText = $(this).data('tooltip');
         const $tooltip = $('#tooltipContainer');
         const offset = $(this).offset();
@@ -311,23 +312,23 @@ function initializeEventListeners() {
     $('#nextBtn').on('click', function() {
         nextStep();
     });
-    
+
     $('#backBtn').on('click', function() {
         previousStep();
     });
-    
+
     // Form submission
     $('#loginForm').on('submit', function(e) {
         e.preventDefault();
         handleFormSubmit();
     });
-    
+
     // Password toggle
     setupPasswordToggle();
-    
+
     // Keyboard shortcuts
     setupKeyboardShortcuts();
-    
+
     // Auto-focus on input when step changes
     $('.form-input').on('focus', function() {
         $(this).select();
@@ -345,7 +346,7 @@ function setupKeyboardShortcuts() {
             e.preventDefault();
             $('#nextBtn').click();
         }
-        
+
         // Escape key to go back
         if (e.key === 'Escape' && currentStep > 1) {
             e.preventDefault();
@@ -363,14 +364,14 @@ function handleFormSubmit() {
     if (!validateCurrentStep()) {
         return;
     }
-    
+
     // Show loading overlay
     showLoading();
-    
+
     // Get form data
     const email = userEmail;
     const password = $('#password').val();
-    
+
     // AJAX request to login.php
     $.ajax({
         url: API_BASE + 'login.php',
@@ -384,7 +385,7 @@ function handleFormSubmit() {
         },
         error: function() {
             hideLoading();
-            showError('Connection error. Please try again.');
+            showError(i18next.t('errors.connection'));
         }
     });
 }
@@ -394,42 +395,42 @@ function handleLoginResponse(response) {
         //const result = JSON.parse(response);
         console.log(response);
         if (response.success) {
-            
+
             // Login successful
             const user = response.user;
-            
+
             // Create session cookie
             createSession(user);
-            
+
             // Hide loading
             hideLoading();
-            
+
             // Show success message
-            showSuccess('Login successful!');
-            
+            showSuccess(i18next.t('login.success'));
+
             // Redirect to index.html
             setTimeout(() => {
                 window.location.href = 'index.html';
-            }, 1000);
-            
+            }, 100);
+
         } else {
             // Login failed - incorrect password
             hideLoading();
-            
+
             const $passwordError = $('#password-error');
             const $passwordInput = $('#password');
-            
-            $passwordError.text(response.message || 'Incorrect password');
+
+            $passwordError.text(response.message || i18next.t('login.errors.incorrectPassword'));
             $passwordInput.addClass('error').removeClass('valid');
-            
+
             // Clear password field
             $passwordInput.val('');
             $passwordInput.focus();
         }
-        
+
     } catch (error) {
         hideLoading();
-        showError('Login failed. Please try again.');
+        showError(i18next.t('login.errors.generic'));
         console.error('Login error:', error);
     }
 }
@@ -454,7 +455,7 @@ function hideLoading() {
 function showSuccess(message) {
     // Create success notification
     const $notification = $('<div class="notification success"></div>').text(message);
-    
+
     // Add notification styles if not already in CSS
     $notification.css({
         position: 'fixed',
@@ -471,16 +472,16 @@ function showSuccess(message) {
         transform: 'translateY(-20px)',
         transition: 'all 0.3s ease'
     });
-    
+
     $('body').append($notification);
-    
+
     setTimeout(() => {
         $notification.css({
             opacity: 1,
             transform: 'translateY(0)'
         });
     }, 100);
-    
+
     setTimeout(() => {
         $notification.css({
             opacity: 0,
@@ -493,7 +494,7 @@ function showSuccess(message) {
 function showError(message) {
     // Create error notification
     const $notification = $('<div class="notification error"></div>').text(message);
-    
+
     // Add notification styles if not already in CSS
     $notification.css({
         position: 'fixed',
@@ -510,16 +511,16 @@ function showError(message) {
         transform: 'translateY(-20px)',
         transition: 'all 0.3s ease'
     });
-    
+
     $('body').append($notification);
-    
+
     setTimeout(() => {
         $notification.css({
             opacity: 1,
             transform: 'translateY(0)'
         });
     }, 100);
-    
+
     setTimeout(() => {
         $notification.css({
             opacity: 0,
