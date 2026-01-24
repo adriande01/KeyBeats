@@ -48,5 +48,16 @@
         "completedSongs": 0,
         "createdAt": "2026-01-21T20:06:33+01:00",
         "progress": []
+    },
+    {
+        "id": "user_1769287853_3524adef",
+        "nickname": "test",
+        "email": "test@gmail.com",
+        "password": "$2y$10$cqDHi4iCHUXkbBLc68auJO\/BV\/nieaSL\/hb18\/B69PMILcM2ddn1K",
+        "avatar": "av7",
+        "level": 0,
+        "completedSongs": 0,
+        "createdAt": "2026-01-24T21:50:53+01:00",
+        "progress": []
     }
 ]
