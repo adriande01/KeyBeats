@@ -193,6 +193,52 @@
         }).fail(function() {
             alert(i18next.t('errors.loadSongs'));
         });
+
+        const btnVolume = $('#btnVolume');
+        const volumeSlider = $('#volumeSlider');
+
+        // Inicializa volumen del audio
+        if (audio) audio.volume = parseFloat(volumeSlider.val());
+
+        // Actualiza volumen al mover el slider
+        volumeSlider.on('input', function() {
+            if (!audio) return;
+            audio.volume = parseFloat(this.value);
+
+            // Cambia icono según volumen
+            if (audio.volume === 0) {
+                btnVolume.html('<i class="fas fa-volume-mute"></i>');
+            } else if (audio.volume < 0.5) {
+                btnVolume.html('<i class="fas fa-volume-down"></i>');
+            } else {
+                btnVolume.html('<i class="fas fa-volume-up"></i>');
+            }
+        });
+
+        // Click en el botón para silenciar / restaurar
+        btnVolume.on('click', function() {
+            if (!audio) return;
+
+            if (audio.volume > 0) {
+                // guardar volumen actual
+                audio.dataset.prevVolume = audio.volume;
+                audio.volume = 0;
+            } else {
+                // restaurar volumen anterior
+                audio.volume = parseFloat(audio.dataset.prevVolume || 1);
+            }
+
+            // Actualiza slider e icono
+            volumeSlider.val(audio.volume);
+            if (audio.volume === 0) {
+                btnVolume.html('<i class="fas fa-volume-mute"></i>');
+            } else if (audio.volume < 0.5) {
+                btnVolume.html('<i class="fas fa-volume-down"></i>');
+            } else {
+                btnVolume.html('<i class="fas fa-volume-up"></i>');
+            }
+        });
+
     });
 
     // ---------- loadUserProgress (read-only display of record prior to play) ----------

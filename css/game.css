@@ -211,3 +211,49 @@ body {
 .btn-main-menu:active {
     transform: translateY(0);
 }
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+}
+
+.btn-volume {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    /* tamaño pequeño */
+    cursor: pointer;
+    padding: 2px;
+}
+
+
+/* Slider compacto */
+
+#volumeSlider {
+    width: 80px;
+    /* pequeño */
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#volumeSlider::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
