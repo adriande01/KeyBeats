@@ -23,6 +23,8 @@ const API_BASE = 'api/';
 // ===================================
 
 $(document).ready(function() {
+
+    
     // Check if user already has session
     checkExistingSession();
 
@@ -37,6 +39,7 @@ $(document).ready(function() {
 
     // Show first step
     showStep(1);
+
 });
 
 // ===================================

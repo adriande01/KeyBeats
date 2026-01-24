@@ -12,8 +12,8 @@
             "description": "KeyBeats - Melde dich bei deinem Konto an"
         },
         "register": {
-            "title": "KeyBeats - Registrierung",
-            "description": "KeyBeats - Erstelle dein Konto und starte deine Rhythmusreise"
+            "title": "KeyBeats - Registrieren",
+            "description": "Erstellen Sie Ihr Konto und beginnen Sie Ihre Rhythmus-Reise"
         }
     },
     "common": {
@@ -60,38 +60,28 @@
         "createAccount": "Hier eines erstellen"
     },
     "register": {
-        "nickname": {
-            "label": "Spitzname",
-            "placeholder": "Gib deinen Spitznamen ein",
-            "help": "3-20 Zeichen erlaubt",
-            "tooltip": "Dein einzigartiger Benutzername für KeyBeats. 3-20 Zeichen, nur alphanumerisch und Unterstriche."
-        },
-        "email": {
-            "label": "E-Mail",
-            "placeholder": "Gib deine E-Mail ein",
-            "help": "Wir werden deine E-Mail niemals weitergeben"
-        },
-        "password": {
-            "label": "Passwort",
-            "placeholder": "Erstelle ein starkes Passwort",
-            "help": "Mindestens 8 Zeichen, 1 Großbuchstabe, 1 Kleinbuchstabe, 1 Zahl",
-            "weak": "Schwach"
-        },
-        "confirm": {
-            "label": "Passwort bestätigen",
-            "placeholder": "Gib dein Passwort erneut ein",
-            "help": "Passwörter müssen übereinstimmen"
-        },
-        "submit": "Konto erstellen",
-        "loading": "Konto wird erstellt...",
-        "haveAccount": "Hast du bereits ein Konto?",
-        "signIn": "Hier anmelden",
-        "avatar": {
-            "selected": "Ausgewählter Avatar",
-            "toggle": "Avatar-Auswahl umschalten",
-            "select": "Wähle deinen Avatar"
-        }
-    },
+    "nickname": "Benutzername",
+    "nicknamePlaceholder": "Geben Sie Ihren Benutzernamen ein",
+    "nicknameHelp": "3-20 Zeichen erlaubt",
+    "email": "E-Mail",
+    "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+    "emailHelp": "Stellen Sie sicher, dass Sie Zugriff auf diese E-Mail haben",
+    "password": "Passwort",
+    "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+    "passwordHelp": "Mindestens 8 Zeichen, 1 Großbuchstabe, 1 Kleinbuchstabe, 1 Zahl",
+    "passwordWeak": "Schwach",
+    "confirmPassword": "Passwort bestätigen",
+    "confirmPasswordPlaceholder": "Bestätigen Sie Ihr Passwort",
+    "back": "Zurück",
+    "next": "Weiter",
+    "createAccount": "Konto erstellen",
+    "creatingAccount": "Konto wird erstellt...",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "signInHere": "Hier anmelden",
+    "selectedAvatar": "Ausgewählter Avatar",
+    "toggleAvatar": "Avatar-Auswahl umschalten",
+    "selectAvatar": "Wählen Sie Ihren Avatar"
+  },
     "navigation": {
         "home": "Startseite",
         "previousStep": "Zum vorherigen Schritt gehen",

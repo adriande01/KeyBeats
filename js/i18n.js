@@ -17,21 +17,19 @@ i18next
                 loadPath: './data/{{lng}}.json'
             },
             detection: {
-                // Language detection order
-                order: ['querystring', 'cookie', 'localStorage', 'navigator'],
+                // Language detection order - IMPORTANTE: localStorage primero
+                order: ['localStorage', 'querystring', 'cookie', 'navigator'],
                 caches: ['localStorage', 'cookie'],
-                // Only look for these languages
                 lookupQuerystring: 'lng',
                 lookupCookie: 'i18next',
-                lookupLocalStorage: 'i18nextLng'
+                lookupLocalStorage: 'keybeats_language'
             },
             // Support only these languages (matching your files: al.json and en.json)
             supportedLngs: ['en', 'de'],
-            // Don't load languages like 'es-ES', only 'en' or 'al'
+            // Don't load languages like 'es-ES', only 'en' or 'de'
             load: 'languageOnly',
-            // Map 'de' to 'al' (German → Albanian?)
-            // If 'al' is not Albanian, adjust accordingly
-            lng: localStorage.getItem('keybeats_language') || 'en'
+            // SOLUCIÓN: Usar directamente el detector, que ya lee de localStorage
+            // No necesitas especificar 'lng' aquí
         },
         translatePage // Callback executed once translations are ready
     );
@@ -99,7 +97,8 @@ function translatePage() {
 window.changeLanguage = function(lang) {
     i18next.changeLanguage(lang, () => {
         translatePage();
-        // Store language preference
+        // Store language preference - i18next ya lo hace automáticamente
+        // pero lo dejamos por seguridad
         localStorage.setItem('keybeats_language', lang);
     });
 };

@@ -60,37 +60,33 @@
         "createAccount": "Create one here"
     },
     "register": {
-        "nickname": {
-            "label": "Nickname",
-            "placeholder": "Enter your nickname",
-            "help": "3-20 characters allowed",
-            "tooltip": "Your unique username for KeyBeats. 3-20 characters, alphanumeric and underscores only."
-        },
-        "email": {
-            "label": "Email",
-            "placeholder": "Enter your email",
-            "help": "We'll never share your email"
-        },
-        "password": {
-            "label": "Password",
-            "placeholder": "Create a strong password",
-            "help": "At least 8 characters, 1 uppercase, 1 lowercase, 1 number",
-            "weak": "Weak"
-        },
-        "confirm": {
-            "label": "Confirm Password",
-            "placeholder": "Re-enter your password",
-            "help": "Passwords must match"
-        },
-        "submit": "Create Account",
-        "loading": "Creating your account...",
-        "haveAccount": "Already have an account?",
-        "signIn": "Sign in here",
-        "avatar": {
-            "selected": "Selected avatar",
-            "toggle": "Toggle avatar selection",
-            "select": "Select your avatar"
-        }
+        "nickname": "Nickname",
+        "nicknamePlaceholder": "Enter your nickname",
+        "nicknameHelp": "3-20 characters allowed",
+        "email": "Email",
+        "emailPlaceholder": "Enter your email",
+        "emailHelp": "Make sure you have access to this email",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "passwordHelp": "At least 8 characters, 1 uppercase, 1 lowercase, 1 number",
+        "passwordWeak": "Weak",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPlaceholder": "Confirm your password",
+        "back": "Back",
+        "next": "Next",
+        "createAccount": "Create Account",
+        "creatingAccount": "Creating your account...",
+        "alreadyHaveAccount": "Already have an account?",
+        "signInHere": "Sign in here",
+        "selectedAvatar": "Selected avatar",
+        "toggleAvatar": "Toggle avatar selection",
+        "selectAvatar": "Select your avatar"
+    },
+    "common": {
+        "selectLanguage": "Language:"
+    },
+    "accessibility": {
+        "skipToForm": "Skip to registration form"
     },
     "navigation": {
         "home": "Home",
