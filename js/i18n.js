@@ -28,10 +28,9 @@ i18next
             supportedLngs: ['en', 'de'],
             // Don't load languages like 'es-ES', only 'en' or 'de'
             load: 'languageOnly',
-            // SOLUCIÓN: Usar directamente el detector, que ya lee de localStorage
-            // No necesitas especificar 'lng' aquí
+            
         },
-        translatePage // Callback executed once translations are ready
+        translatePage 
     );
 
 // ---------------------------------------------------------------------------

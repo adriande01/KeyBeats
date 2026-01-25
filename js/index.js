@@ -1,7 +1,4 @@
-/**
- * KeyBeats - Main Page (index.js)
- * Handles song selection, user session, GSAP loading animation, and navigation
- */
+
 
 // ============================================================================
 // GLOBAL VARIABLES

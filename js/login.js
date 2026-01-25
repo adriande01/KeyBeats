@@ -1,7 +1,3 @@
-/* ===================================
-   KEYBEATS LOGIN - JAVASCRIPT
-   Step-by-step login with validation
-   =================================== */
 
 // ===================================
 // 1. GLOBAL VARIABLES & STATE

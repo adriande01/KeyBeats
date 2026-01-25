@@ -1,20 +1,3 @@
-/**
- * game.js — KeyBeats gameplay (AJAX + JSON)
- *
- * Requirements:
- *  - api/get-songs.php     (provided)
- *  - api/get-user-progress.php  (provided)
- *  - api/save-progress.php  (provided)
- *  - cookie "keybeats_session" must include either the userId string or a JSON object containing userId
- *
- * Behavior:
- *  - load song by ?songId=...
- *  - load user progress from server (for read-only prior record display)
- *  - run gameplay (runStars starts at 0)
- *  - accept keyboard input (single keys and modifier combos like "Ctrl+D")
- *  - at song end, POST to api/save-progress.php with userId, songId, starsEarned
- *  - dynamically set background video based on song
- */
 
 // TEST COMENTARO DE ADRI
 
@@ -215,7 +198,7 @@
             }
         });
 
-        // Click en el botón para silenciar / restaurar
+      
         btnVolume.on('click', function() {
             if (!audio) return;
 
