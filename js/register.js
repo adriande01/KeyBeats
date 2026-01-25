@@ -4,7 +4,8 @@
 
 let currentStep = 1;
 const totalSteps = 4;
-let selectedAvatar = null;
+
+let selectedAvatar = 'av0';
 let isAvatarGridExpanded = false;
 
 let formData = {
@@ -12,7 +13,7 @@ let formData = {
     email: '',
     password: '',
     confirmPassword: '',
-    avatar: ''
+    avatar: 'av0'
 };
 
 // Base API path
@@ -24,7 +25,9 @@ const API_BASE = 'api/';
 
 $(document).ready(function() {
 
-    
+    $(`#avatar${selectedAvatar.slice(2)}`).prop('checked', true);
+    $('#selectedAvatarImage').attr('src', `assets/avatars/${selectedAvatar}.png`);
+
     // Check if user already has session
     checkExistingSession();
 
@@ -96,6 +99,8 @@ function initializeAvatarSelection() {
 
             $('#selectedAvatarImage').attr('src', avatarSrc);
             formData.avatar = selectedAvatar;
+
+            clearAvatarError();
 
             setTimeout(() => {
                 toggleAvatarGrid();
@@ -271,10 +276,12 @@ function validateStep1() {
     const $errorMsg = $('#nickname-error');
     const $availMsg = $('.availability-message');
 
+    clearAvatarError();
     if (!selectedAvatar) {
-        showError('Please select an avatar');
+        showAvatarError('Please select an avatar');
         return false;
     }
+
 
     if (!$nicknameInput.valid()) {
         return false;
@@ -630,6 +637,16 @@ function showError(message) {
         setTimeout(() => $notification.remove(), 300);
     }, 3000);
 }
+
+function showAvatarError(message) {
+    const $error = $('#avatarError');
+    $error.text(message).addClass('error-message').fadeIn(200);
+}
+
+function clearAvatarError() {
+    $('#avatarError').hide().text('');
+}
+
 
 // ===================================
 // 17. RESET FORM

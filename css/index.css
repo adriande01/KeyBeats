@@ -138,7 +138,7 @@ body {
     backdrop-filter: blur(10px);
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    height: 100px;
+    height: 110px;
 }
 
 
@@ -215,6 +215,7 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-bottom: 5px;
 }
 
 
@@ -256,7 +257,7 @@ body {
     gap: 30px;
     justify-content: flex-end;
     align-items: stretch;
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 120px);
 }
 
 
@@ -707,4 +708,25 @@ body {
     #language-select {
         width: 80%;
     }
+}
+
+
+/* Logout button */
+
+.btn-logout {
+    background: transparent;
+    border: none;
+    color: #ff6b6b;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-logout:hover {
+    transform: scale(1.15);
+    opacity: 0.85;
 }

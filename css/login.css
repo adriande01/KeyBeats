@@ -3,6 +3,7 @@
    Kawaii/Pastel Theme - Osu Inspired
    =================================== */
 
+
 /* ===================================
    1. ROOT VARIABLES & RESET
    =================================== */
@@ -16,7 +17,6 @@
     --color-success: #98D8C8;
     --color-error: #FF6B6B;
     --color-warning: #FFE66D;
-    
     /* Neutral Colors */
     --color-white: #FFFFFF;
     --color-cream: #FFF8F0;
@@ -25,12 +25,10 @@
     --color-dark-gray: #888888;
     --color-text-primary: #4A4A4A;
     --color-text-secondary: #888888;
-    
     /* Background Colors */
     --bg-solid: #FFF0F5;
     --bg-card: rgba(255, 255, 255, 0.95);
     --bg-overlay: rgba(0, 0, 0, 0.3);
-    
     /* Spacing */
     --spacing-xs: 4px;
     --spacing-sm: 8px;
@@ -38,7 +36,6 @@
     --spacing-lg: 24px;
     --spacing-xl: 32px;
     --spacing-xxl: 48px;
-    
     /* Typography */
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --font-size-xs: 12px;
@@ -47,24 +44,20 @@
     --font-size-lg: 18px;
     --font-size-xl: 24px;
     --font-size-xxl: 32px;
-    
     /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
     --radius-round: 50%;
-    
     /* Shadows */
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
     --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.25);
-    
     /* Card Fixed Dimensions */
     --card-width: 420px;
     --card-height: 480px;
     --card-padding: 32px;
-    
     /* Transitions */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
@@ -91,6 +84,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 /* ===================================
    2. BACKGROUND LAYERS
    =================================== */
@@ -108,11 +102,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, 
-        var(--bg-solid) 0%, 
-        #FFE4E1 50%, 
-        #E6E6FA 100%
-    );
+    background: linear-gradient(135deg, var(--bg-solid) 0%, #FFE4E1 50%, #E6E6FA 100%);
 }
 
 .background-animated {
@@ -128,9 +118,14 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 0.4; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.4;
+    }
 }
+
 
 /* ===================================
    3. LOGIN CONTAINER
@@ -144,6 +139,7 @@ body {
     min-height: 100vh;
     padding: var(--spacing-lg);
 }
+
 
 /* ===================================
    4. LOGIN CARD (FIXED SIZE)
@@ -168,6 +164,7 @@ body {
     box-shadow: 0 16px 32px rgba(255, 182, 193, 0.3);
 }
 
+
 /* ===================================
    5. CARD HEADER
    =================================== */
@@ -191,6 +188,7 @@ body {
     color: var(--color-text-secondary);
     font-weight: 400;
 }
+
 
 /* ===================================
    6. FORM STRUCTURE
@@ -223,6 +221,7 @@ body {
         transform: translateX(0);
     }
 }
+
 
 /* ===================================
    7. INPUT SECTION
@@ -304,7 +303,6 @@ body {
     border-top: 6px solid var(--color-text-primary);
 }
 
-
 .input-wrapper {
     position: relative;
     display: flex;
@@ -369,11 +367,11 @@ body {
     pointer-events: none;
 }
 
-.form-input.valid ~ .validation-icon {
+.form-input.valid~.validation-icon {
     display: flex;
 }
 
-.form-input.valid ~ .validation-icon::before {
+.form-input.valid~.validation-icon::before {
     content: '\f00c';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
@@ -381,11 +379,11 @@ body {
     font-size: var(--font-size-md);
 }
 
-.form-input.error ~ .validation-icon {
+.form-input.error~.validation-icon {
     display: flex;
 }
 
-.form-input.error ~ .validation-icon::before {
+.form-input.error~.validation-icon::before {
     content: '\f00d';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
@@ -436,6 +434,7 @@ body {
     min-height: 20px;
     font-weight: 500;
 }
+
 
 /* ===================================
    8. NAVIGATION BUTTONS
@@ -514,6 +513,7 @@ body {
     background: linear-gradient(135deg, var(--color-primary-dark) 0%, #FF1493 100%);
 }
 
+
 /* ===================================
    9. LOADING OVERLAY
    =================================== */
@@ -543,7 +543,9 @@ body {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loading-text {
@@ -552,6 +554,7 @@ body {
     font-weight: 600;
     color: var(--color-primary-dark);
 }
+
 
 /* ===================================
    10. FOOTER LINKS
@@ -585,6 +588,7 @@ body {
     border-radius: var(--radius-sm);
 }
 
+
 /* ===================================
    11. ACCESSIBILITY
    =================================== */
@@ -611,29 +615,26 @@ body {
     outline-offset: 2px;
 }
 
+
 /* ===================================
    12. RESPONSIVE DESIGN
    =================================== */
 
 @media (max-width: 768px) {
-    :root {
+     :root {
         --card-width: 360px;
         --card-height: 440px;
         --card-padding: 24px;
     }
-    
     .login-container {
         padding: var(--spacing-md);
     }
-    
     .card-title {
         font-size: var(--font-size-xl);
     }
-    
     .form-navigation {
         flex-direction: column;
     }
-    
     .btn {
         width: 100%;
         justify-content: center;
@@ -641,41 +642,39 @@ body {
 }
 
 @media (max-width: 480px) {
-    :root {
+     :root {
         --card-width: 100%;
         --card-height: auto;
         --card-padding: 20px;
     }
-    
     .login-card {
         height: auto;
         min-height: 400px;
         max-height: 90vh;
     }
-    
     .card-title {
         font-size: var(--font-size-lg);
     }
-    
     .form-input {
         font-size: var(--font-size-sm);
         padding: var(--spacing-sm) var(--spacing-md);
         padding-left: 40px;
         padding-right: 40px;
     }
-    
     .btn {
         padding: var(--spacing-sm) var(--spacing-lg);
         font-size: var(--font-size-sm);
     }
 }
 
+
 /* ===================================
    13. ANIMATIONS
    =================================== */
 
 @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
         box-shadow: 0 0 0 0 rgba(255, 182, 193, 0.7);
     }
     50% {
@@ -688,9 +687,23 @@ body {
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
 }
 
 .form-input.error {
@@ -702,7 +715,6 @@ body {
     .loading-overlay {
         display: none;
     }
-    
     .login-card {
         box-shadow: none;
         border: 1px solid var(--color-text-primary);

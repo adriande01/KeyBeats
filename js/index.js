@@ -501,6 +501,11 @@ function initEventListeners() {
 
     // Keyboard shortcuts
     handleKeyboardShortcuts();
+
+    $("#logoutBtn").on("click", function(e) {
+        e.stopPropagation(); // evita conflictos con otros clicks del header
+        logout();
+    });
 }
 
 // ============================================================================
@@ -523,3 +528,8 @@ $(document).ready(function() {
     // Note: loadUserData() and loadSongs() are called from checkSession()
     // after session validation, which happens before animation completes
 });
+
+function logout() {
+    deleteCookie("keybeats_session");
+    window.location.href = "login.html";
+}
