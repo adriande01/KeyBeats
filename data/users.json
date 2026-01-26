@@ -33,10 +33,19 @@
         "email": "erika@gmail.com",
         "password": "$2y$10$5LsXor3H\/GWI0QGnqZvtEOiCrkrpC8Q99hky03RpPb\/IKXjFU9P8O",
         "avatar": "av1",
-        "level": 0,
-        "completedSongs": 0,
+        "level": 2,
+        "completedSongs": 1,
         "createdAt": "2026-01-21T13:13:25+01:00",
-        "progress": []
+        "progress": [
+            {
+                "id": "progress_1769414708_7593beaa",
+                "userId": "user_1768997605_ef95b5ad",
+                "songId": "song_pokemon",
+                "starsEarned": 2,
+                "lastPlayed": "2026-01-26T09:05:08+01:00",
+                "attempts": 1
+            }
+        ]
     },
     {
         "id": "user_1769022393_179bdbd7",
